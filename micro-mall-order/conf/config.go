@@ -15,7 +15,6 @@ type Server struct {
 	Zap         Zap         `mapstructure:"common-zap"`
 	CommonEtcd  CommonEtcd  `mapstructure:"common-etcd"`
 	CommonMysql MysqlOption `mapstructure:"common-mysql"`
-	ThirdParty  `mapstructure:"micro-mall-micro-mall-thirdparty-proto-base"`
 }
 
 func getCurrentDir() string {
@@ -36,32 +35,7 @@ func init() {
 		if err != nil {
 			panic(err)
 		}
-		viper.SetConfigName("/micro-mall-api")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/micro-mall-micro-mall-coupon-proto")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/micro-mall-micro-mall-member-proto")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/micro-mall-micro-mall-order-proto")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/micro-mall-micro-mall-product-proto")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/security")
+		viper.SetConfigName("/order")
 		err = viper.MergeInConfig()
 		if err != nil {
 			panic(err)

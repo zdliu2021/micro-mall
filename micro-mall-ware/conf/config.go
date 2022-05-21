@@ -15,7 +15,6 @@ type Server struct {
 	Zap         Zap         `mapstructure:"common-zap"`
 	CommonEtcd  CommonEtcd  `mapstructure:"common-etcd"`
 	CommonMysql MysqlOption `mapstructure:"common-mysql"`
-	ThirdParty  `mapstructure:"micro-mall-micro-mall-thirdparty-proto-base"`
 }
 
 func getCurrentDir() string {

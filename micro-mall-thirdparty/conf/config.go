@@ -36,31 +36,6 @@ func init() {
 		if err != nil {
 			panic(err)
 		}
-		viper.SetConfigName("/api")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/coupon")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/member")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/order")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
-		viper.SetConfigName("/product")
-		err = viper.MergeInConfig()
-		if err != nil {
-			panic(err)
-		}
 		viper.SetConfigName("/security")
 		err = viper.MergeInConfig()
 		if err != nil {
