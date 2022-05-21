@@ -1,0 +1,16 @@
+syntax = "proto3";
+package proto_coupon;
+import "mall-demo/micro-mall-coupon/proto/micro-mall-coupon-proto/spu.proto";
+
+option go_package = "proto_coupon/";
+
+service CouponRpc {
+  rpc SaveSkuLadder(proto_spu.SaveSkuLadderRequest)
+      returns (proto_spu.SaveSkuLadderResponse);
+  rpc SaveSkuFullReduction(proto_spu.SaveSkuFullReductionRequest)
+      returns (proto_spu.SaveSkuFullReductionResponse);
+  rpc SaveSpuBounds(proto_spu.SaveSpuBoundsRequest)
+      returns (proto_spu.SaveSpuboundsResponse);
+  rpc SaveMemberPrice(proto_spu.SaveMemberPriceRequest)
+      returns (proto_spu.SaveMemberPriceResponse);
+}

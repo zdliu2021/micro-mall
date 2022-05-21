@@ -1,0 +1,91 @@
+version: '3'
+services:
+  dtm:
+    image: yedf/dtm
+    container_name: dtm
+    restart: always
+    environment:
+      STORE_DRIVER: mysql
+      STORE_HOST: 127.0.0.1
+      STORE_USER: root
+      STORE_PASSWORD: 'root'
+      STORE_PORT: 3309
+    ports:
+      - '36789:36789'
+      - '36790:36790'
+    networks:
+      - mall
+
+  es:
+    image: elasticsearch:8.2.0
+    container_name: es
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+      - ./config/elasticSearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - es_plugins:/usr/share/elasticsearch/plugins
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - mall
+
+  kibana:
+    image: kibana:8.2.0
+    container_name: kibana
+    ports:
+      - 5601:5601
+    volumes:
+      - ./config/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+    networks:
+      - mall
+    depends_on:
+      - es
+
+
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3309:3306
+    volumes:
+#      - ./config/mysql/my.cnf:/etc/mysql/my.cnf
+      - mysql_data:/var/lib/mysql
+      - mysql-files:/var/lib/mysql-files
+    networks:
+      - mall
+
+  redis:
+    image: redis:6.2.6
+    container_name: redis
+    restart: always
+    ports:
+      - 6399:6379
+    volumes:
+      - ./config/redis/redis.conf:/usr/local/etc/redis/redis.conf
+      - redis_data:/data
+    networks:
+      - mall
+
+volumes:
+  es_data:
+    driver: local
+  es_plugins:
+    driver: local
+  mysql_data:
+    driver: local
+  mysql-files:
+    driver: local
+  redis_data:
+    driver: local
+
+networks:
+  mall:
+    driver: bridge

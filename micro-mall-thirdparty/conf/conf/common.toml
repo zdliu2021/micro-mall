@@ -1,0 +1,31 @@
+[common-etcd]
+host = "127.0.0.1:2379"
+basePath = "/mall-demo"
+serverPathCoupon = "CouponRpc"
+serverPathMember = "MemberRpc"
+serverPathProduct = "ProductRpc"
+serverPathOrder = "OrderRpc"
+
+
+[common-redis]
+redisAddress = "127.0.0.1:6379"
+redisPassword = ""
+db = 0
+
+[common-zap]
+level = 'info'
+format = 'console'
+prefix =  '[mall-demo] '
+director =  'log'
+show-line =  true
+encode-level = 'LowercaseColorLevelEncoder'
+stacktrace-key = 'stacktrace'
+log-in-console = true
+
+[common-mysql]
+path = "127.0.0.1:3309"
+username = "root"
+password = ""
+config =  "charset=utf8mb4&parseTime=True&loc=Local"
+max-idle-conns = 20
+max-open-conns = 20

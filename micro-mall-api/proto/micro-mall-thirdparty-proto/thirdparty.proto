@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package thirdparty;
+
+option go_package = "proto_thirdparty/";
+
+service ThirdPartyRpc {
+  rpc GetOSSToken(GetOSSTokenRequest) returns (GetOSSTokenResponse);
+}
+
+message GetOSSTokenRequest {}
+
+message GetOSSTokenResponse {
+  string access_id = 1;
+  string host = 2;
+  int64 expire = 3;
+  string signature = 4;
+  string policy = 5;
+  string dir = 6;
+  string callback = 7;
+}

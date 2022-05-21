@@ -1,0 +1,53 @@
+syntax = "proto3";
+package proto_spu;
+
+option go_package = "proto_coupon/";
+
+message MemberPriceEntity {
+  int64 id = 1;
+  int64 sku_id = 2;
+  int64 member_level_id = 3;
+  string member_level_name = 4;
+  double member_price = 5;
+  int32 add_other = 6;
+}
+message SpuBoundEntity {
+  int64 id = 1;
+  int64 spu_id = 2;
+  double grow_bounds = 3;
+  double buy_bounds = 4;
+  int32 work = 5;
+}
+
+message SkuFullReductionEntity {
+  int64 id = 1;
+  int64 sku_id = 2;
+  double full_price = 3;
+  double reduce_price = 4;
+  int32 add_other = 5;
+}
+
+message SkuLadderEntity {
+  int64 id = 1;
+  int64 sku_id = 2;
+  int32 full_count = 3;
+  double discount = 4;
+  double price = 5;
+  int32 add_other = 6;
+}
+
+message SaveSkuLadderRequest {
+  repeated SkuLadderEntity sku_ladder_entities = 1;
+}
+message SaveSkuLadderResponse {}
+message SaveSkuFullReductionRequest {
+  repeated SkuFullReductionEntity sku_full_reduction_entities = 1;
+}
+message SaveSkuFullReductionResponse {};
+message SaveSpuBoundsRequest { SpuBoundEntity spu_bound_entities = 1; }
+message SaveSpuboundsResponse {};
+
+message SaveMemberPriceRequest {
+  repeated MemberPriceEntity member_price_entities = 1;
+}
+message SaveMemberPriceResponse {};
