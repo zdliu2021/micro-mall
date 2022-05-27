@@ -961,7 +961,7 @@ func ListSku(ctx *gin.Context) {
 }
 
 func UpSpu(ctx *gin.Context) {
-	spuId, _ := strconv.ParseInt(ctx.Query("spuId"), 10, 64)
+	spuId, _ := strconv.ParseInt(ctx.Param("spuId"), 10, 64)
 	rpcClient := rpc_client.GetProductClient()
 	_, err := rpcClient.UpSpu(context.TODO(), &proto_product.UpSpuRequest{
 		SpuId: spuId,

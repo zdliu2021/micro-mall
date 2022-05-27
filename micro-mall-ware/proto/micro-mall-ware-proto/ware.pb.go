@@ -20,6 +20,100 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type GetSkuHasStockRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SkuIds []int64 `protobuf:"varint,1,rep,packed,name=sku_ids,json=skuIds,proto3" json:"sku_ids,omitempty"`
+}
+
+func (x *GetSkuHasStockRequest) Reset() {
+	*x = GetSkuHasStockRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSkuHasStockRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSkuHasStockRequest) ProtoMessage() {}
+
+func (x *GetSkuHasStockRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSkuHasStockRequest.ProtoReflect.Descriptor instead.
+func (*GetSkuHasStockRequest) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *GetSkuHasStockRequest) GetSkuIds() []int64 {
+	if x != nil {
+		return x.SkuIds
+	}
+	return nil
+}
+
+type GetSkuHasStockResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SkuHasStock map[int64]bool `protobuf:"bytes,1,rep,name=sku_has_stock,json=skuHasStock,proto3" json:"sku_has_stock,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"varint,2,opt,name=value,proto3"`
+}
+
+func (x *GetSkuHasStockResponse) Reset() {
+	*x = GetSkuHasStockResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetSkuHasStockResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSkuHasStockResponse) ProtoMessage() {}
+
+func (x *GetSkuHasStockResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSkuHasStockResponse.ProtoReflect.Descriptor instead.
+func (*GetSkuHasStockResponse) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *GetSkuHasStockResponse) GetSkuHasStock() map[int64]bool {
+	if x != nil {
+		return x.SkuHasStock
+	}
+	return nil
+}
+
 type UpdatePurchaseRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -35,7 +129,7 @@ type UpdatePurchaseRequest struct {
 func (x *UpdatePurchaseRequest) Reset() {
 	*x = UpdatePurchaseRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[0]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -48,7 +142,7 @@ func (x *UpdatePurchaseRequest) String() string {
 func (*UpdatePurchaseRequest) ProtoMessage() {}
 
 func (x *UpdatePurchaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[0]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +155,7 @@ func (x *UpdatePurchaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePurchaseRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePurchaseRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{0}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdatePurchaseRequest) GetId() int32 {
@@ -108,7 +202,7 @@ type UpdatePurchaseResponse struct {
 func (x *UpdatePurchaseResponse) Reset() {
 	*x = UpdatePurchaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[1]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -121,7 +215,7 @@ func (x *UpdatePurchaseResponse) String() string {
 func (*UpdatePurchaseResponse) ProtoMessage() {}
 
 func (x *UpdatePurchaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[1]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -134,7 +228,7 @@ func (x *UpdatePurchaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePurchaseResponse.ProtoReflect.Descriptor instead.
 func (*UpdatePurchaseResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{1}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{3}
 }
 
 type GetPurchaseListRequest struct {
@@ -152,7 +246,7 @@ type GetPurchaseListRequest struct {
 func (x *GetPurchaseListRequest) Reset() {
 	*x = GetPurchaseListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[2]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -165,7 +259,7 @@ func (x *GetPurchaseListRequest) String() string {
 func (*GetPurchaseListRequest) ProtoMessage() {}
 
 func (x *GetPurchaseListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[2]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -178,7 +272,7 @@ func (x *GetPurchaseListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPurchaseListRequest.ProtoReflect.Descriptor instead.
 func (*GetPurchaseListRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{2}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GetPurchaseListRequest) GetPageNum() int32 {
@@ -236,7 +330,7 @@ type PurchaseEntity struct {
 func (x *PurchaseEntity) Reset() {
 	*x = PurchaseEntity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[3]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -249,7 +343,7 @@ func (x *PurchaseEntity) String() string {
 func (*PurchaseEntity) ProtoMessage() {}
 
 func (x *PurchaseEntity) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[3]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -262,7 +356,7 @@ func (x *PurchaseEntity) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PurchaseEntity.ProtoReflect.Descriptor instead.
 func (*PurchaseEntity) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{3}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *PurchaseEntity) GetId() int64 {
@@ -347,7 +441,7 @@ type GetPurchaseListResponse struct {
 func (x *GetPurchaseListResponse) Reset() {
 	*x = GetPurchaseListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[4]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -360,7 +454,7 @@ func (x *GetPurchaseListResponse) String() string {
 func (*GetPurchaseListResponse) ProtoMessage() {}
 
 func (x *GetPurchaseListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[4]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -373,7 +467,7 @@ func (x *GetPurchaseListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPurchaseListResponse.ProtoReflect.Descriptor instead.
 func (*GetPurchaseListResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{4}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *GetPurchaseListResponse) GetTotalCount() int32 {
@@ -409,7 +503,7 @@ type SavePurchaseRequest struct {
 func (x *SavePurchaseRequest) Reset() {
 	*x = SavePurchaseRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[5]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -422,7 +516,7 @@ func (x *SavePurchaseRequest) String() string {
 func (*SavePurchaseRequest) ProtoMessage() {}
 
 func (x *SavePurchaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[5]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -435,7 +529,7 @@ func (x *SavePurchaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SavePurchaseRequest.ProtoReflect.Descriptor instead.
 func (*SavePurchaseRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{5}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SavePurchaseRequest) GetAssigneeId() int32 {
@@ -510,7 +604,7 @@ type SavePurchaseResponse struct {
 func (x *SavePurchaseResponse) Reset() {
 	*x = SavePurchaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[6]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -523,7 +617,7 @@ func (x *SavePurchaseResponse) String() string {
 func (*SavePurchaseResponse) ProtoMessage() {}
 
 func (x *SavePurchaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[6]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -536,7 +630,7 @@ func (x *SavePurchaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SavePurchaseResponse.ProtoReflect.Descriptor instead.
 func (*SavePurchaseResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{6}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{8}
 }
 
 type SavePurchaseDetailRequest struct {
@@ -555,7 +649,7 @@ type SavePurchaseDetailRequest struct {
 func (x *SavePurchaseDetailRequest) Reset() {
 	*x = SavePurchaseDetailRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[7]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -568,7 +662,7 @@ func (x *SavePurchaseDetailRequest) String() string {
 func (*SavePurchaseDetailRequest) ProtoMessage() {}
 
 func (x *SavePurchaseDetailRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[7]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -581,7 +675,7 @@ func (x *SavePurchaseDetailRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SavePurchaseDetailRequest.ProtoReflect.Descriptor instead.
 func (*SavePurchaseDetailRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{7}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SavePurchaseDetailRequest) GetPurchaseId() int64 {
@@ -635,7 +729,7 @@ type SavePurchaseDetailResponse struct {
 func (x *SavePurchaseDetailResponse) Reset() {
 	*x = SavePurchaseDetailResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[8]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -648,7 +742,7 @@ func (x *SavePurchaseDetailResponse) String() string {
 func (*SavePurchaseDetailResponse) ProtoMessage() {}
 
 func (x *SavePurchaseDetailResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[8]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -661,7 +755,7 @@ func (x *SavePurchaseDetailResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SavePurchaseDetailResponse.ProtoReflect.Descriptor instead.
 func (*SavePurchaseDetailResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{8}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{10}
 }
 
 type SaveWareRequest struct {
@@ -677,7 +771,7 @@ type SaveWareRequest struct {
 func (x *SaveWareRequest) Reset() {
 	*x = SaveWareRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[9]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -690,7 +784,7 @@ func (x *SaveWareRequest) String() string {
 func (*SaveWareRequest) ProtoMessage() {}
 
 func (x *SaveWareRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[9]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -703,7 +797,7 @@ func (x *SaveWareRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveWareRequest.ProtoReflect.Descriptor instead.
 func (*SaveWareRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{9}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *SaveWareRequest) GetName() string {
@@ -736,7 +830,7 @@ type SaveWareResponse struct {
 func (x *SaveWareResponse) Reset() {
 	*x = SaveWareResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[10]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -749,7 +843,7 @@ func (x *SaveWareResponse) String() string {
 func (*SaveWareResponse) ProtoMessage() {}
 
 func (x *SaveWareResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[10]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -762,7 +856,7 @@ func (x *SaveWareResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveWareResponse.ProtoReflect.Descriptor instead.
 func (*SaveWareResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{10}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{12}
 }
 
 type GetWareInfoListRequest struct {
@@ -780,7 +874,7 @@ type GetWareInfoListRequest struct {
 func (x *GetWareInfoListRequest) Reset() {
 	*x = GetWareInfoListRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[11]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -793,7 +887,7 @@ func (x *GetWareInfoListRequest) String() string {
 func (*GetWareInfoListRequest) ProtoMessage() {}
 
 func (x *GetWareInfoListRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[11]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -806,7 +900,7 @@ func (x *GetWareInfoListRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWareInfoListRequest.ProtoReflect.Descriptor instead.
 func (*GetWareInfoListRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{11}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetWareInfoListRequest) GetPageNum() int32 {
@@ -859,7 +953,7 @@ type GetWareInfoListResponse struct {
 func (x *GetWareInfoListResponse) Reset() {
 	*x = GetWareInfoListResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[12]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -872,7 +966,7 @@ func (x *GetWareInfoListResponse) String() string {
 func (*GetWareInfoListResponse) ProtoMessage() {}
 
 func (x *GetWareInfoListResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[12]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -885,7 +979,7 @@ func (x *GetWareInfoListResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWareInfoListResponse.ProtoReflect.Descriptor instead.
 func (*GetWareInfoListResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{12}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *GetWareInfoListResponse) GetTotalCount() int32 {
@@ -940,7 +1034,7 @@ type GetSkuWareInfoRequest struct {
 func (x *GetSkuWareInfoRequest) Reset() {
 	*x = GetSkuWareInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[13]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -953,7 +1047,7 @@ func (x *GetSkuWareInfoRequest) String() string {
 func (*GetSkuWareInfoRequest) ProtoMessage() {}
 
 func (x *GetSkuWareInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[13]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -966,7 +1060,7 @@ func (x *GetSkuWareInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSkuWareInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetSkuWareInfoRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{13}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetSkuWareInfoRequest) GetPageNum() int32 {
@@ -1033,7 +1127,7 @@ type GetSkuWareInfoResponse struct {
 func (x *GetSkuWareInfoResponse) Reset() {
 	*x = GetSkuWareInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[14]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1046,7 +1140,7 @@ func (x *GetSkuWareInfoResponse) String() string {
 func (*GetSkuWareInfoResponse) ProtoMessage() {}
 
 func (x *GetSkuWareInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[14]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1059,7 +1153,7 @@ func (x *GetSkuWareInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSkuWareInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetSkuWareInfoResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{14}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *GetSkuWareInfoResponse) GetTotalCount() int32 {
@@ -1114,7 +1208,7 @@ type GetPurchaseDetailInfoRequest struct {
 func (x *GetPurchaseDetailInfoRequest) Reset() {
 	*x = GetPurchaseDetailInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[15]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1127,7 +1221,7 @@ func (x *GetPurchaseDetailInfoRequest) String() string {
 func (*GetPurchaseDetailInfoRequest) ProtoMessage() {}
 
 func (x *GetPurchaseDetailInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[15]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1140,7 +1234,7 @@ func (x *GetPurchaseDetailInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPurchaseDetailInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetPurchaseDetailInfoRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{15}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *GetPurchaseDetailInfoRequest) GetPageNum() int32 {
@@ -1207,7 +1301,7 @@ type GetPurchaseDetailInfoResponse struct {
 func (x *GetPurchaseDetailInfoResponse) Reset() {
 	*x = GetPurchaseDetailInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[16]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1220,7 +1314,7 @@ func (x *GetPurchaseDetailInfoResponse) String() string {
 func (*GetPurchaseDetailInfoResponse) ProtoMessage() {}
 
 func (x *GetPurchaseDetailInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[16]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1233,7 +1327,7 @@ func (x *GetPurchaseDetailInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetPurchaseDetailInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetPurchaseDetailInfoResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{16}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetPurchaseDetailInfoResponse) GetTotalCount() int32 {
@@ -1283,7 +1377,7 @@ type MergePurchaseRequest struct {
 func (x *MergePurchaseRequest) Reset() {
 	*x = MergePurchaseRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[17]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1296,7 +1390,7 @@ func (x *MergePurchaseRequest) String() string {
 func (*MergePurchaseRequest) ProtoMessage() {}
 
 func (x *MergePurchaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[17]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1309,7 +1403,7 @@ func (x *MergePurchaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MergePurchaseRequest.ProtoReflect.Descriptor instead.
 func (*MergePurchaseRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{17}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *MergePurchaseRequest) GetPurchaseId() int64 {
@@ -1335,7 +1429,7 @@ type MergePurchaseResponse struct {
 func (x *MergePurchaseResponse) Reset() {
 	*x = MergePurchaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[18]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1348,7 +1442,7 @@ func (x *MergePurchaseResponse) String() string {
 func (*MergePurchaseResponse) ProtoMessage() {}
 
 func (x *MergePurchaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[18]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1361,7 +1455,7 @@ func (x *MergePurchaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MergePurchaseResponse.ProtoReflect.Descriptor instead.
 func (*MergePurchaseResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{18}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{20}
 }
 
 type GetUnReceivedPurchaseInfoRequest struct {
@@ -1373,7 +1467,7 @@ type GetUnReceivedPurchaseInfoRequest struct {
 func (x *GetUnReceivedPurchaseInfoRequest) Reset() {
 	*x = GetUnReceivedPurchaseInfoRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[19]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1386,7 +1480,7 @@ func (x *GetUnReceivedPurchaseInfoRequest) String() string {
 func (*GetUnReceivedPurchaseInfoRequest) ProtoMessage() {}
 
 func (x *GetUnReceivedPurchaseInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[19]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1399,7 +1493,7 @@ func (x *GetUnReceivedPurchaseInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetUnReceivedPurchaseInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetUnReceivedPurchaseInfoRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{19}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{21}
 }
 
 type GetUnReceivedPurchaseInfoResponse struct {
@@ -1417,7 +1511,7 @@ type GetUnReceivedPurchaseInfoResponse struct {
 func (x *GetUnReceivedPurchaseInfoResponse) Reset() {
 	*x = GetUnReceivedPurchaseInfoResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[20]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1430,7 +1524,7 @@ func (x *GetUnReceivedPurchaseInfoResponse) String() string {
 func (*GetUnReceivedPurchaseInfoResponse) ProtoMessage() {}
 
 func (x *GetUnReceivedPurchaseInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[20]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1443,7 +1537,7 @@ func (x *GetUnReceivedPurchaseInfoResponse) ProtoReflect() protoreflect.Message 
 
 // Deprecated: Use GetUnReceivedPurchaseInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetUnReceivedPurchaseInfoResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{20}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *GetUnReceivedPurchaseInfoResponse) GetTotalCount() int32 {
@@ -1492,7 +1586,7 @@ type ReceivePurchaseRequest struct {
 func (x *ReceivePurchaseRequest) Reset() {
 	*x = ReceivePurchaseRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[21]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1505,7 +1599,7 @@ func (x *ReceivePurchaseRequest) String() string {
 func (*ReceivePurchaseRequest) ProtoMessage() {}
 
 func (x *ReceivePurchaseRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[21]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1518,7 +1612,7 @@ func (x *ReceivePurchaseRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceivePurchaseRequest.ProtoReflect.Descriptor instead.
 func (*ReceivePurchaseRequest) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{21}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ReceivePurchaseRequest) GetItems() []int64 {
@@ -1537,7 +1631,7 @@ type ReceivePurchaseResponse struct {
 func (x *ReceivePurchaseResponse) Reset() {
 	*x = ReceivePurchaseResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[22]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1550,7 +1644,7 @@ func (x *ReceivePurchaseResponse) String() string {
 func (*ReceivePurchaseResponse) ProtoMessage() {}
 
 func (x *ReceivePurchaseResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[22]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1563,7 +1657,7 @@ func (x *ReceivePurchaseResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReceivePurchaseResponse.ProtoReflect.Descriptor instead.
 func (*ReceivePurchaseResponse) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{22}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{24}
 }
 
 type GetWareInfoListResponse_List struct {
@@ -1580,7 +1674,7 @@ type GetWareInfoListResponse_List struct {
 func (x *GetWareInfoListResponse_List) Reset() {
 	*x = GetWareInfoListResponse_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[23]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1593,7 +1687,7 @@ func (x *GetWareInfoListResponse_List) String() string {
 func (*GetWareInfoListResponse_List) ProtoMessage() {}
 
 func (x *GetWareInfoListResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[23]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1606,7 +1700,7 @@ func (x *GetWareInfoListResponse_List) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetWareInfoListResponse_List.ProtoReflect.Descriptor instead.
 func (*GetWareInfoListResponse_List) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{12, 0}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{14, 0}
 }
 
 func (x *GetWareInfoListResponse_List) GetId() int32 {
@@ -1653,7 +1747,7 @@ type GetSkuWareInfoResponse_List struct {
 func (x *GetSkuWareInfoResponse_List) Reset() {
 	*x = GetSkuWareInfoResponse_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[24]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1666,7 +1760,7 @@ func (x *GetSkuWareInfoResponse_List) String() string {
 func (*GetSkuWareInfoResponse_List) ProtoMessage() {}
 
 func (x *GetSkuWareInfoResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[24]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1679,7 +1773,7 @@ func (x *GetSkuWareInfoResponse_List) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSkuWareInfoResponse_List.ProtoReflect.Descriptor instead.
 func (*GetSkuWareInfoResponse_List) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{14, 0}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{16, 0}
 }
 
 func (x *GetSkuWareInfoResponse_List) GetId() int32 {
@@ -1741,7 +1835,7 @@ type GetPurchaseDetailInfoResponse_List struct {
 func (x *GetPurchaseDetailInfoResponse_List) Reset() {
 	*x = GetPurchaseDetailInfoResponse_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[25]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1754,7 +1848,7 @@ func (x *GetPurchaseDetailInfoResponse_List) String() string {
 func (*GetPurchaseDetailInfoResponse_List) ProtoMessage() {}
 
 func (x *GetPurchaseDetailInfoResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[25]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1767,7 +1861,7 @@ func (x *GetPurchaseDetailInfoResponse_List) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use GetPurchaseDetailInfoResponse_List.ProtoReflect.Descriptor instead.
 func (*GetPurchaseDetailInfoResponse_List) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{16, 0}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{18, 0}
 }
 
 func (x *GetPurchaseDetailInfoResponse_List) GetId() int32 {
@@ -1839,7 +1933,7 @@ type GetUnReceivedPurchaseInfoResponse_List struct {
 func (x *GetUnReceivedPurchaseInfoResponse_List) Reset() {
 	*x = GetUnReceivedPurchaseInfoResponse_List{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[26]
+		mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1852,7 +1946,7 @@ func (x *GetUnReceivedPurchaseInfoResponse_List) String() string {
 func (*GetUnReceivedPurchaseInfoResponse_List) ProtoMessage() {}
 
 func (x *GetUnReceivedPurchaseInfoResponse_List) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[26]
+	mi := &file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1865,7 +1959,7 @@ func (x *GetUnReceivedPurchaseInfoResponse_List) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetUnReceivedPurchaseInfoResponse_List.ProtoReflect.Descriptor instead.
 func (*GetUnReceivedPurchaseInfoResponse_List) Descriptor() ([]byte, []int) {
-	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{20, 0}
+	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescGZIP(), []int{22, 0}
 }
 
 func (x *GetUnReceivedPurchaseInfoResponse_List) GetId() int32 {
@@ -1945,7 +2039,21 @@ var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDes
 	0x6f, 0x2d, 0x6d, 0x61, 0x6c, 0x6c, 0x2d, 0x77, 0x61, 0x72, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x2f, 0x6d, 0x69, 0x63, 0x72, 0x6f, 0x2d, 0x6d, 0x61, 0x6c, 0x6c, 0x2d, 0x77, 0x61, 0x72,
 	0x65, 0x2d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x12, 0x04, 0x77, 0x61, 0x72, 0x65, 0x22, 0x9b, 0x01, 0x0a, 0x15, 0x55, 0x70, 0x64,
+	0x74, 0x6f, 0x12, 0x04, 0x77, 0x61, 0x72, 0x65, 0x22, 0x30, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x53,
+	0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x6b, 0x75, 0x5f, 0x69, 0x64, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x03, 0x52, 0x06, 0x73, 0x6b, 0x75, 0x49, 0x64, 0x73, 0x22, 0xab, 0x01, 0x0a, 0x16, 0x47,
+	0x65, 0x74, 0x53, 0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x51, 0x0a, 0x0d, 0x73, 0x6b, 0x75, 0x5f, 0x68, 0x61, 0x73,
+	0x5f, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2d, 0x2e, 0x77,
+	0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f,
+	0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x53, 0x6b, 0x75, 0x48, 0x61,
+	0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x0b, 0x73, 0x6b, 0x75,
+	0x48, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x1a, 0x3e, 0x0a, 0x10, 0x53, 0x6b, 0x75, 0x48,
+	0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03,
+	0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14,
+	0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x05, 0x76,
+	0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x22, 0x9b, 0x01, 0x0a, 0x15, 0x55, 0x70, 0x64,
 	0x61, 0x74, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
 	0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x02,
 	0x69, 0x64, 0x12, 0x1f, 0x0a, 0x0b, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x65, 0x65, 0x5f, 0x69,
@@ -2179,7 +2287,7 @@ var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDes
 	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x01,
 	0x20, 0x03, 0x28, 0x03, 0x52, 0x05, 0x69, 0x74, 0x65, 0x6d, 0x73, 0x22, 0x19, 0x0a, 0x17, 0x52,
 	0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x87, 0x07, 0x0a, 0x07, 0x57, 0x61, 0x72, 0x65, 0x52,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0xd4, 0x07, 0x0a, 0x07, 0x57, 0x61, 0x72, 0x65, 0x52,
 	0x70, 0x63, 0x12, 0x4e, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x57, 0x61, 0x72, 0x65, 0x49, 0x6e, 0x66,
 	0x6f, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74,
 	0x57, 0x61, 0x72, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75,
@@ -2193,51 +2301,56 @@ var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDes
 	0x1b, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x6b, 0x75, 0x57, 0x61, 0x72,
 	0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77,
 	0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x6b, 0x75, 0x57, 0x61, 0x72, 0x65, 0x49, 0x6e,
-	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x15, 0x47, 0x65,
-	0x74, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x49,
-	0x6e, 0x66, 0x6f, 0x12, 0x22, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x75,
+	0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x0e, 0x47, 0x65,
+	0x74, 0x53, 0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x12, 0x1b, 0x2e, 0x77,
+	0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x53, 0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f,
+	0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65,
+	0x2e, 0x47, 0x65, 0x74, 0x53, 0x6b, 0x75, 0x48, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x60, 0x0a, 0x15, 0x47, 0x65, 0x74, 0x50, 0x75,
 	0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x49, 0x6e, 0x66, 0x6f,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47,
-	0x65, 0x74, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c,
-	0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x12,
-	0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61,
-	0x69, 0x6c, 0x12, 0x1f, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75,
-	0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x20, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50,
-	0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x50, 0x75, 0x72, 0x63,
-	0x68, 0x61, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e,
-	0x47, 0x65, 0x74, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65,
-	0x74, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x44, 0x0a, 0x0b, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72,
-	0x63, 0x61, 0x73, 0x65, 0x12, 0x19, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65,
-	0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x1a, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68,
-	0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x48, 0x0a, 0x0d, 0x4d,
-	0x65, 0x72, 0x67, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x12, 0x1a, 0x2e, 0x77,
-	0x61, 0x72, 0x65, 0x2e, 0x4d, 0x65, 0x72, 0x67, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73,
-	0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e,
-	0x4d, 0x65, 0x72, 0x67, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x6c, 0x0a, 0x19, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x52, 0x65,
-	0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x49, 0x6e,
-	0x66, 0x6f, 0x12, 0x26, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x52,
-	0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x49,
-	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x77, 0x61, 0x72,
-	0x65, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x50,
-	0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0f, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x75,
-	0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x12, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x52, 0x65,
-	0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x52, 0x65, 0x63, 0x65,
-	0x69, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f,
-	0x6e, 0x73, 0x65, 0x12, 0x4b, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x72,
-	0x63, 0x68, 0x61, 0x73, 0x65, 0x12, 0x1b, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x55, 0x70, 0x64,
-	0x61, 0x74, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x1a, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x12, 0x22, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x75, 0x72, 0x63, 0x68,
+	0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x50,
+	0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x49, 0x6e, 0x66,
+	0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x57, 0x0a, 0x12, 0x53, 0x61, 0x76,
+	0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12,
+	0x1f, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68,
+	0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x20, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63,
+	0x68, 0x61, 0x73, 0x65, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x4e, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73,
+	0x65, 0x4c, 0x69, 0x73, 0x74, 0x12, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74,
+	0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x75,
+	0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x4c, 0x69, 0x73, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x44, 0x0a, 0x0b, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x61, 0x73,
+	0x65, 0x12, 0x19, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72,
+	0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x77,
+	0x61, 0x72, 0x65, 0x2e, 0x53, 0x61, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x48, 0x0a, 0x0d, 0x4d, 0x65, 0x72, 0x67,
+	0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x12, 0x1a, 0x2e, 0x77, 0x61, 0x72, 0x65,
+	0x2e, 0x4d, 0x65, 0x72, 0x67, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x4d, 0x65, 0x72,
+	0x67, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x6c, 0x0a, 0x19, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x52, 0x65, 0x63, 0x65, 0x69,
+	0x76, 0x65, 0x64, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x12,
+	0x26, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x55, 0x6e, 0x52, 0x65, 0x63, 0x65,
+	0x69, 0x76, 0x65, 0x64, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x27, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x47,
+	0x65, 0x74, 0x55, 0x6e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x64, 0x50, 0x75, 0x72, 0x63,
+	0x68, 0x61, 0x73, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x4e, 0x0a, 0x0f, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68,
+	0x61, 0x73, 0x65, 0x12, 0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x52, 0x65, 0x63, 0x65, 0x69,
+	0x76, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x1d, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x52, 0x65, 0x63, 0x65, 0x69, 0x76, 0x65,
 	0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x42, 0x0d, 0x5a, 0x0b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x77, 0x61, 0x72, 0x65, 0x2f, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0x4b, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x72, 0x63, 0x68, 0x61,
+	0x73, 0x65, 0x12, 0x1b, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x50, 0x75, 0x72, 0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x1c, 0x2e, 0x77, 0x61, 0x72, 0x65, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x75, 0x72,
+	0x63, 0x68, 0x61, 0x73, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0d, 0x5a,
+	0x0b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x77, 0x61, 0x72, 0x65, 0x2f, 0x62, 0x06, 0x70, 0x72,
+	0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2252,69 +2365,75 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDe
 	return file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDescData
 }
 
-var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
+var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes = make([]protoimpl.MessageInfo, 30)
 var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_goTypes = []interface{}{
-	(*UpdatePurchaseRequest)(nil),                  // 0: ware.UpdatePurchaseRequest
-	(*UpdatePurchaseResponse)(nil),                 // 1: ware.UpdatePurchaseResponse
-	(*GetPurchaseListRequest)(nil),                 // 2: ware.GetPurchaseListRequest
-	(*PurchaseEntity)(nil),                         // 3: ware.PurchaseEntity
-	(*GetPurchaseListResponse)(nil),                // 4: ware.GetPurchaseListResponse
-	(*SavePurchaseRequest)(nil),                    // 5: ware.SavePurchaseRequest
-	(*SavePurchaseResponse)(nil),                   // 6: ware.SavePurchaseResponse
-	(*SavePurchaseDetailRequest)(nil),              // 7: ware.SavePurchaseDetailRequest
-	(*SavePurchaseDetailResponse)(nil),             // 8: ware.SavePurchaseDetailResponse
-	(*SaveWareRequest)(nil),                        // 9: ware.SaveWareRequest
-	(*SaveWareResponse)(nil),                       // 10: ware.SaveWareResponse
-	(*GetWareInfoListRequest)(nil),                 // 11: ware.GetWareInfoListRequest
-	(*GetWareInfoListResponse)(nil),                // 12: ware.GetWareInfoListResponse
-	(*GetSkuWareInfoRequest)(nil),                  // 13: ware.GetSkuWareInfoRequest
-	(*GetSkuWareInfoResponse)(nil),                 // 14: ware.GetSkuWareInfoResponse
-	(*GetPurchaseDetailInfoRequest)(nil),           // 15: ware.GetPurchaseDetailInfoRequest
-	(*GetPurchaseDetailInfoResponse)(nil),          // 16: ware.GetPurchaseDetailInfoResponse
-	(*MergePurchaseRequest)(nil),                   // 17: ware.MergePurchaseRequest
-	(*MergePurchaseResponse)(nil),                  // 18: ware.MergePurchaseResponse
-	(*GetUnReceivedPurchaseInfoRequest)(nil),       // 19: ware.GetUnReceivedPurchaseInfoRequest
-	(*GetUnReceivedPurchaseInfoResponse)(nil),      // 20: ware.GetUnReceivedPurchaseInfoResponse
-	(*ReceivePurchaseRequest)(nil),                 // 21: ware.ReceivePurchaseRequest
-	(*ReceivePurchaseResponse)(nil),                // 22: ware.ReceivePurchaseResponse
-	(*GetWareInfoListResponse_List)(nil),           // 23: ware.GetWareInfoListResponse.List
-	(*GetSkuWareInfoResponse_List)(nil),            // 24: ware.GetSkuWareInfoResponse.List
-	(*GetPurchaseDetailInfoResponse_List)(nil),     // 25: ware.GetPurchaseDetailInfoResponse.List
-	(*GetUnReceivedPurchaseInfoResponse_List)(nil), // 26: ware.GetUnReceivedPurchaseInfoResponse.List
+	(*GetSkuHasStockRequest)(nil),                  // 0: ware.GetSkuHasStockRequest
+	(*GetSkuHasStockResponse)(nil),                 // 1: ware.GetSkuHasStockResponse
+	(*UpdatePurchaseRequest)(nil),                  // 2: ware.UpdatePurchaseRequest
+	(*UpdatePurchaseResponse)(nil),                 // 3: ware.UpdatePurchaseResponse
+	(*GetPurchaseListRequest)(nil),                 // 4: ware.GetPurchaseListRequest
+	(*PurchaseEntity)(nil),                         // 5: ware.PurchaseEntity
+	(*GetPurchaseListResponse)(nil),                // 6: ware.GetPurchaseListResponse
+	(*SavePurchaseRequest)(nil),                    // 7: ware.SavePurchaseRequest
+	(*SavePurchaseResponse)(nil),                   // 8: ware.SavePurchaseResponse
+	(*SavePurchaseDetailRequest)(nil),              // 9: ware.SavePurchaseDetailRequest
+	(*SavePurchaseDetailResponse)(nil),             // 10: ware.SavePurchaseDetailResponse
+	(*SaveWareRequest)(nil),                        // 11: ware.SaveWareRequest
+	(*SaveWareResponse)(nil),                       // 12: ware.SaveWareResponse
+	(*GetWareInfoListRequest)(nil),                 // 13: ware.GetWareInfoListRequest
+	(*GetWareInfoListResponse)(nil),                // 14: ware.GetWareInfoListResponse
+	(*GetSkuWareInfoRequest)(nil),                  // 15: ware.GetSkuWareInfoRequest
+	(*GetSkuWareInfoResponse)(nil),                 // 16: ware.GetSkuWareInfoResponse
+	(*GetPurchaseDetailInfoRequest)(nil),           // 17: ware.GetPurchaseDetailInfoRequest
+	(*GetPurchaseDetailInfoResponse)(nil),          // 18: ware.GetPurchaseDetailInfoResponse
+	(*MergePurchaseRequest)(nil),                   // 19: ware.MergePurchaseRequest
+	(*MergePurchaseResponse)(nil),                  // 20: ware.MergePurchaseResponse
+	(*GetUnReceivedPurchaseInfoRequest)(nil),       // 21: ware.GetUnReceivedPurchaseInfoRequest
+	(*GetUnReceivedPurchaseInfoResponse)(nil),      // 22: ware.GetUnReceivedPurchaseInfoResponse
+	(*ReceivePurchaseRequest)(nil),                 // 23: ware.ReceivePurchaseRequest
+	(*ReceivePurchaseResponse)(nil),                // 24: ware.ReceivePurchaseResponse
+	nil,                                            // 25: ware.GetSkuHasStockResponse.SkuHasStockEntry
+	(*GetWareInfoListResponse_List)(nil),           // 26: ware.GetWareInfoListResponse.List
+	(*GetSkuWareInfoResponse_List)(nil),            // 27: ware.GetSkuWareInfoResponse.List
+	(*GetPurchaseDetailInfoResponse_List)(nil),     // 28: ware.GetPurchaseDetailInfoResponse.List
+	(*GetUnReceivedPurchaseInfoResponse_List)(nil), // 29: ware.GetUnReceivedPurchaseInfoResponse.List
 }
 var file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_depIdxs = []int32{
-	3,  // 0: ware.GetPurchaseListResponse.purchase_entities:type_name -> ware.PurchaseEntity
-	23, // 1: ware.GetWareInfoListResponse.list:type_name -> ware.GetWareInfoListResponse.List
-	24, // 2: ware.GetSkuWareInfoResponse.list:type_name -> ware.GetSkuWareInfoResponse.List
-	25, // 3: ware.GetPurchaseDetailInfoResponse.list:type_name -> ware.GetPurchaseDetailInfoResponse.List
-	26, // 4: ware.GetUnReceivedPurchaseInfoResponse.list:type_name -> ware.GetUnReceivedPurchaseInfoResponse.List
-	11, // 5: ware.WareRpc.GetWareInfoList:input_type -> ware.GetWareInfoListRequest
-	9,  // 6: ware.WareRpc.SaveWare:input_type -> ware.SaveWareRequest
-	13, // 7: ware.WareRpc.GetSkuWareInfo:input_type -> ware.GetSkuWareInfoRequest
-	15, // 8: ware.WareRpc.GetPurchaseDetailInfo:input_type -> ware.GetPurchaseDetailInfoRequest
-	7,  // 9: ware.WareRpc.SavePurchaseDetail:input_type -> ware.SavePurchaseDetailRequest
-	2,  // 10: ware.WareRpc.GetPurchaseList:input_type -> ware.GetPurchaseListRequest
-	5,  // 11: ware.WareRpc.SavePurcase:input_type -> ware.SavePurchaseRequest
-	17, // 12: ware.WareRpc.MergePurchase:input_type -> ware.MergePurchaseRequest
-	19, // 13: ware.WareRpc.GetUnReceivedPurchaseInfo:input_type -> ware.GetUnReceivedPurchaseInfoRequest
-	21, // 14: ware.WareRpc.ReceivePurchase:input_type -> ware.ReceivePurchaseRequest
-	0,  // 15: ware.WareRpc.UpdatePurchase:input_type -> ware.UpdatePurchaseRequest
-	12, // 16: ware.WareRpc.GetWareInfoList:output_type -> ware.GetWareInfoListResponse
-	10, // 17: ware.WareRpc.SaveWare:output_type -> ware.SaveWareResponse
-	14, // 18: ware.WareRpc.GetSkuWareInfo:output_type -> ware.GetSkuWareInfoResponse
-	16, // 19: ware.WareRpc.GetPurchaseDetailInfo:output_type -> ware.GetPurchaseDetailInfoResponse
-	8,  // 20: ware.WareRpc.SavePurchaseDetail:output_type -> ware.SavePurchaseDetailResponse
-	4,  // 21: ware.WareRpc.GetPurchaseList:output_type -> ware.GetPurchaseListResponse
-	6,  // 22: ware.WareRpc.SavePurcase:output_type -> ware.SavePurchaseResponse
-	18, // 23: ware.WareRpc.MergePurchase:output_type -> ware.MergePurchaseResponse
-	20, // 24: ware.WareRpc.GetUnReceivedPurchaseInfo:output_type -> ware.GetUnReceivedPurchaseInfoResponse
-	22, // 25: ware.WareRpc.ReceivePurchase:output_type -> ware.ReceivePurchaseResponse
-	1,  // 26: ware.WareRpc.UpdatePurchase:output_type -> ware.UpdatePurchaseResponse
-	16, // [16:27] is the sub-list for method output_type
-	5,  // [5:16] is the sub-list for method input_type
-	5,  // [5:5] is the sub-list for extension type_name
-	5,  // [5:5] is the sub-list for extension extendee
-	0,  // [0:5] is the sub-list for field type_name
+	25, // 0: ware.GetSkuHasStockResponse.sku_has_stock:type_name -> ware.GetSkuHasStockResponse.SkuHasStockEntry
+	5,  // 1: ware.GetPurchaseListResponse.purchase_entities:type_name -> ware.PurchaseEntity
+	26, // 2: ware.GetWareInfoListResponse.list:type_name -> ware.GetWareInfoListResponse.List
+	27, // 3: ware.GetSkuWareInfoResponse.list:type_name -> ware.GetSkuWareInfoResponse.List
+	28, // 4: ware.GetPurchaseDetailInfoResponse.list:type_name -> ware.GetPurchaseDetailInfoResponse.List
+	29, // 5: ware.GetUnReceivedPurchaseInfoResponse.list:type_name -> ware.GetUnReceivedPurchaseInfoResponse.List
+	13, // 6: ware.WareRpc.GetWareInfoList:input_type -> ware.GetWareInfoListRequest
+	11, // 7: ware.WareRpc.SaveWare:input_type -> ware.SaveWareRequest
+	15, // 8: ware.WareRpc.GetSkuWareInfo:input_type -> ware.GetSkuWareInfoRequest
+	0,  // 9: ware.WareRpc.GetSkuHasStock:input_type -> ware.GetSkuHasStockRequest
+	17, // 10: ware.WareRpc.GetPurchaseDetailInfo:input_type -> ware.GetPurchaseDetailInfoRequest
+	9,  // 11: ware.WareRpc.SavePurchaseDetail:input_type -> ware.SavePurchaseDetailRequest
+	4,  // 12: ware.WareRpc.GetPurchaseList:input_type -> ware.GetPurchaseListRequest
+	7,  // 13: ware.WareRpc.SavePurcase:input_type -> ware.SavePurchaseRequest
+	19, // 14: ware.WareRpc.MergePurchase:input_type -> ware.MergePurchaseRequest
+	21, // 15: ware.WareRpc.GetUnReceivedPurchaseInfo:input_type -> ware.GetUnReceivedPurchaseInfoRequest
+	23, // 16: ware.WareRpc.ReceivePurchase:input_type -> ware.ReceivePurchaseRequest
+	2,  // 17: ware.WareRpc.UpdatePurchase:input_type -> ware.UpdatePurchaseRequest
+	14, // 18: ware.WareRpc.GetWareInfoList:output_type -> ware.GetWareInfoListResponse
+	12, // 19: ware.WareRpc.SaveWare:output_type -> ware.SaveWareResponse
+	16, // 20: ware.WareRpc.GetSkuWareInfo:output_type -> ware.GetSkuWareInfoResponse
+	1,  // 21: ware.WareRpc.GetSkuHasStock:output_type -> ware.GetSkuHasStockResponse
+	18, // 22: ware.WareRpc.GetPurchaseDetailInfo:output_type -> ware.GetPurchaseDetailInfoResponse
+	10, // 23: ware.WareRpc.SavePurchaseDetail:output_type -> ware.SavePurchaseDetailResponse
+	6,  // 24: ware.WareRpc.GetPurchaseList:output_type -> ware.GetPurchaseListResponse
+	8,  // 25: ware.WareRpc.SavePurcase:output_type -> ware.SavePurchaseResponse
+	20, // 26: ware.WareRpc.MergePurchase:output_type -> ware.MergePurchaseResponse
+	22, // 27: ware.WareRpc.GetUnReceivedPurchaseInfo:output_type -> ware.GetUnReceivedPurchaseInfoResponse
+	24, // 28: ware.WareRpc.ReceivePurchase:output_type -> ware.ReceivePurchaseResponse
+	3,  // 29: ware.WareRpc.UpdatePurchase:output_type -> ware.UpdatePurchaseResponse
+	18, // [18:30] is the sub-list for method output_type
+	6,  // [6:18] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init() }
@@ -2324,7 +2443,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePurchaseRequest); i {
+			switch v := v.(*GetSkuHasStockRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2336,7 +2455,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePurchaseResponse); i {
+			switch v := v.(*GetSkuHasStockResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2348,7 +2467,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPurchaseListRequest); i {
+			switch v := v.(*UpdatePurchaseRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2360,7 +2479,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PurchaseEntity); i {
+			switch v := v.(*UpdatePurchaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2372,7 +2491,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPurchaseListResponse); i {
+			switch v := v.(*GetPurchaseListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2384,7 +2503,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SavePurchaseRequest); i {
+			switch v := v.(*PurchaseEntity); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2396,7 +2515,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SavePurchaseResponse); i {
+			switch v := v.(*GetPurchaseListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2408,7 +2527,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SavePurchaseDetailRequest); i {
+			switch v := v.(*SavePurchaseRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2420,7 +2539,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SavePurchaseDetailResponse); i {
+			switch v := v.(*SavePurchaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2432,7 +2551,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SaveWareRequest); i {
+			switch v := v.(*SavePurchaseDetailRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2444,7 +2563,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SaveWareResponse); i {
+			switch v := v.(*SavePurchaseDetailResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2456,7 +2575,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetWareInfoListRequest); i {
+			switch v := v.(*SaveWareRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2468,7 +2587,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetWareInfoListResponse); i {
+			switch v := v.(*SaveWareResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2480,7 +2599,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSkuWareInfoRequest); i {
+			switch v := v.(*GetWareInfoListRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2492,7 +2611,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSkuWareInfoResponse); i {
+			switch v := v.(*GetWareInfoListResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2504,7 +2623,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPurchaseDetailInfoRequest); i {
+			switch v := v.(*GetSkuWareInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2516,7 +2635,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPurchaseDetailInfoResponse); i {
+			switch v := v.(*GetSkuWareInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2528,7 +2647,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MergePurchaseRequest); i {
+			switch v := v.(*GetPurchaseDetailInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2540,7 +2659,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MergePurchaseResponse); i {
+			switch v := v.(*GetPurchaseDetailInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2552,7 +2671,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUnReceivedPurchaseInfoRequest); i {
+			switch v := v.(*MergePurchaseRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2564,7 +2683,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetUnReceivedPurchaseInfoResponse); i {
+			switch v := v.(*MergePurchaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2576,7 +2695,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReceivePurchaseRequest); i {
+			switch v := v.(*GetUnReceivedPurchaseInfoRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2588,7 +2707,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReceivePurchaseResponse); i {
+			switch v := v.(*GetUnReceivedPurchaseInfoResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2600,7 +2719,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetWareInfoListResponse_List); i {
+			switch v := v.(*ReceivePurchaseRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2612,19 +2731,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetSkuWareInfoResponse_List); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetPurchaseDetailInfoResponse_List); i {
+			switch v := v.(*ReceivePurchaseResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2636,6 +2743,42 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			}
 		}
 		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetWareInfoListResponse_List); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetSkuWareInfoResponse_List); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPurchaseDetailInfoResponse_List); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetUnReceivedPurchaseInfoResponse_List); i {
 			case 0:
 				return &v.state
@@ -2654,7 +2797,7 @@ func file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_init(
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mall_demo_micro_mall_ware_proto_micro_mall_ware_proto_ware_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   27,
+			NumMessages:   30,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

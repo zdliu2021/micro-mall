@@ -49,6 +49,27 @@ func (ws *WareService) GetSkuWareInfo(ctx context.Context, req *proto_ware.GetSk
 	return &resp, nil
 }
 
+func (ws *WareService) GetSkuHasStock(ctx context.Context, req *proto_ware.GetSkuHasStockRequest) (*proto_ware.GetSkuHasStockResponse, error) {
+	var skuStocks []model.WmsWareSku
+	global.WmsMysqlConn.Model(&model.WmsWareSku{}).Where("sku_id in ?", req.SkuIds).Find(&skuStocks)
+	resp := proto_ware.GetSkuHasStockResponse{
+		SkuHasStock: make(map[int64]bool),
+	}
+	for _, skuStock := range skuStocks {
+		if skuStock.Stock-skuStock.StockLocked > 0 {
+			resp.SkuHasStock[skuStock.SkuId] = true
+		} else {
+			resp.SkuHasStock[skuStock.SkuId] = false
+		}
+	}
+	for _, skuId := range req.SkuIds {
+		if _, ok := resp.SkuHasStock[skuId]; !ok {
+			resp.SkuHasStock[skuId] = false
+		}
+	}
+	return &resp, nil
+}
+
 func (ws *WareService) GetPurchaseDetailInfo(ctx context.Context, req *proto_ware.GetPurchaseDetailInfoRequest) (*proto_ware.GetPurchaseDetailInfoResponse, error) {
 	var purchaseDetaileds []model.WmsPurchaseDetail
 	global.WmsMysqlConn.Model(&model.WmsPurchaseDetail{}).Offset(int((req.PageNum-1)*req.PageSize)).Limit(int(req.PageSize)).Where("ware_id = ? and status = ?", req.WareId, req.Status).Find(&purchaseDetaileds)

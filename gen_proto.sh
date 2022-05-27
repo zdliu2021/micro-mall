@@ -27,7 +27,7 @@
 #
 
 cd ..
-services=(api coupon member order product thirdparty ware)
+services=(api coupon member order product thirdparty ware search)
 
 # shellcheck disable=SC2068
 for service in ${services[@]}

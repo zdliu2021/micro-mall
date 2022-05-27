@@ -23,6 +23,8 @@ var (
 
 func InitRpcClients() {
 	rpc_client.InitCouponClient()
+	rpc_client.InitSearchClient()
+	rpc_client.InitWareRpcClient()
 }
 
 func StartServer(addr string) {

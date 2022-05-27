@@ -4,16 +4,25 @@ import (
 	"github.com/gin-gonic/gin"
 	"mall-demo/micro-mall-api/middleware"
 	"mall-demo/micro-mall-api/router/api/v1"
-	"mall-demo/micro-mall-api/rpc-client"
-	"time"
+	"mall-demo/micro-mall-api/router/html"
+	rpc_client "mall-demo/micro-mall-api/rpc-client"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
-
 	// 开启跨域
 	router.Use(middleware.Cors())
-	router.Use(middleware.RateLimitMiddleware(time.Second, 100, 100))
+	//router.Use(middleware.RateLimitMiddleware(time.Second, 100, 100))
+
+	// HTML
+	router.LoadHTMLGlob("templates/**/*.html")
+	router.Static("/assets", "templates/")
+	htmlRouter := router.Group("")
+	{
+		htmlRouter.GET("login", html.Login)
+	}
+
+	// api
 	route := router.Group("renren-fast")
 	ProductGroup := route.Group("product")
 	{
@@ -87,10 +96,10 @@ func InitRouter() *gin.Engine {
 		MemberGroup.POST("memberlevel/delete", v1.DeleteMemberLevel)
 		MemberGroup.POST("memberlevel/update", v1.UpdateMemberLevel)
 
-		MemberGroup.GET("micro-mall-micro-mall-member-proto/list", v1.GetMember)
-		MemberGroup.POST("micro-mall-micro-mall-member-proto/save", v1.SaveMember)
-		MemberGroup.POST("micro-mall-micro-mall-member-proto/delete", v1.DeleteMember)
-		MemberGroup.POST("micro-mall-micro-mall-member-proto/update", v1.UpdateMember)
+		MemberGroup.GET("member/list", v1.GetMember)
+		MemberGroup.POST("member/save", v1.SaveMember)
+		MemberGroup.POST("member/delete", v1.DeleteMember)
+		MemberGroup.POST("member/update", v1.UpdateMember)
 	}
 
 	WareGroup := route.Group("ware")

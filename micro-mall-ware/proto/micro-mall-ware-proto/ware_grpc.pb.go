@@ -26,6 +26,7 @@ type WareRpcClient interface {
 	GetWareInfoList(ctx context.Context, in *GetWareInfoListRequest, opts ...grpc.CallOption) (*GetWareInfoListResponse, error)
 	SaveWare(ctx context.Context, in *SaveWareRequest, opts ...grpc.CallOption) (*SaveWareResponse, error)
 	GetSkuWareInfo(ctx context.Context, in *GetSkuWareInfoRequest, opts ...grpc.CallOption) (*GetSkuWareInfoResponse, error)
+	GetSkuHasStock(ctx context.Context, in *GetSkuHasStockRequest, opts ...grpc.CallOption) (*GetSkuHasStockResponse, error)
 	// purchaseDetail
 	GetPurchaseDetailInfo(ctx context.Context, in *GetPurchaseDetailInfoRequest, opts ...grpc.CallOption) (*GetPurchaseDetailInfoResponse, error)
 	SavePurchaseDetail(ctx context.Context, in *SavePurchaseDetailRequest, opts ...grpc.CallOption) (*SavePurchaseDetailResponse, error)
@@ -67,6 +68,15 @@ func (c *wareRpcClient) SaveWare(ctx context.Context, in *SaveWareRequest, opts 
 func (c *wareRpcClient) GetSkuWareInfo(ctx context.Context, in *GetSkuWareInfoRequest, opts ...grpc.CallOption) (*GetSkuWareInfoResponse, error) {
 	out := new(GetSkuWareInfoResponse)
 	err := c.cc.Invoke(ctx, "/ware.WareRpc/GetSkuWareInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *wareRpcClient) GetSkuHasStock(ctx context.Context, in *GetSkuHasStockRequest, opts ...grpc.CallOption) (*GetSkuHasStockResponse, error) {
+	out := new(GetSkuHasStockResponse)
+	err := c.cc.Invoke(ctx, "/ware.WareRpc/GetSkuHasStock", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -153,6 +163,7 @@ type WareRpcServer interface {
 	GetWareInfoList(context.Context, *GetWareInfoListRequest) (*GetWareInfoListResponse, error)
 	SaveWare(context.Context, *SaveWareRequest) (*SaveWareResponse, error)
 	GetSkuWareInfo(context.Context, *GetSkuWareInfoRequest) (*GetSkuWareInfoResponse, error)
+	GetSkuHasStock(context.Context, *GetSkuHasStockRequest) (*GetSkuHasStockResponse, error)
 	// purchaseDetail
 	GetPurchaseDetailInfo(context.Context, *GetPurchaseDetailInfoRequest) (*GetPurchaseDetailInfoResponse, error)
 	SavePurchaseDetail(context.Context, *SavePurchaseDetailRequest) (*SavePurchaseDetailResponse, error)
@@ -178,6 +189,9 @@ func (UnimplementedWareRpcServer) SaveWare(context.Context, *SaveWareRequest) (*
 }
 func (UnimplementedWareRpcServer) GetSkuWareInfo(context.Context, *GetSkuWareInfoRequest) (*GetSkuWareInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSkuWareInfo not implemented")
+}
+func (UnimplementedWareRpcServer) GetSkuHasStock(context.Context, *GetSkuHasStockRequest) (*GetSkuHasStockResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSkuHasStock not implemented")
 }
 func (UnimplementedWareRpcServer) GetPurchaseDetailInfo(context.Context, *GetPurchaseDetailInfoRequest) (*GetPurchaseDetailInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPurchaseDetailInfo not implemented")
@@ -266,6 +280,24 @@ func _WareRpc_GetSkuWareInfo_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(WareRpcServer).GetSkuWareInfo(ctx, req.(*GetSkuWareInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _WareRpc_GetSkuHasStock_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSkuHasStockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(WareRpcServer).GetSkuHasStock(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/ware.WareRpc/GetSkuHasStock",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(WareRpcServer).GetSkuHasStock(ctx, req.(*GetSkuHasStockRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -432,6 +464,10 @@ var WareRpc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSkuWareInfo",
 			Handler:    _WareRpc_GetSkuWareInfo_Handler,
+		},
+		{
+			MethodName: "GetSkuHasStock",
+			Handler:    _WareRpc_GetSkuHasStock_Handler,
 		},
 		{
 			MethodName: "GetPurchaseDetailInfo",

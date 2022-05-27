@@ -17,6 +17,9 @@ func (s *Server) GetWareInfoList(ctx context.Context, req *proto_ware.GetWareInf
 func (s *Server) SaveWare(ctx context.Context, req *proto_ware.SaveWareRequest) (*proto_ware.SaveWareResponse, error) {
 	return s.wareService.SaveWare(ctx, req)
 }
+func (s *Server) GetSkuHasStock(ctx context.Context, req *proto_ware.GetSkuHasStockRequest) (*proto_ware.GetSkuHasStockResponse, error) {
+	return s.wareService.GetSkuHasStock(ctx, req)
+}
 
 func (s *Server) GetSkuWareInfo(ctx context.Context, req *proto_ware.GetSkuWareInfoRequest) (*proto_ware.GetSkuWareInfoResponse, error) {
 	return s.wareService.GetSkuWareInfo(ctx, req)

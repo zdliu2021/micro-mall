@@ -9,6 +9,8 @@ import (
 	"mall-demo/micro-mall-product/model"
 	proto_coupon "mall-demo/micro-mall-product/proto/micro-mall-coupon-proto"
 	proto_product "mall-demo/micro-mall-product/proto/micro-mall-product-proto"
+	proto_search "mall-demo/micro-mall-product/proto/micro-mall-search-proto"
+	proto_ware "mall-demo/micro-mall-product/proto/micro-mall-ware-proto"
 	"mall-demo/micro-mall-product/rpc-client"
 	"time"
 )
@@ -205,12 +207,59 @@ func (ss *SpuService) SearchSpuInfo(ctx context.Context, req *proto_product.Sear
 	return &resp, nil
 }
 
+// 商品上架，刷新ES
+
 func (ss *SpuService) UpSpu(ctx context.Context, req *proto_product.UpSpuRequest) (*proto_product.UpSpuResponse, error) {
-	var spuInfo model.PmsSpuInfo
-	global.PmsMysqlConn.Model(&model.PmsSpuInfo{}).Where("id = ?", req.SpuId).First(&spuInfo)
-	spuInfo.PublishStatus = 2
-	global.PmsMysqlConn.Save(spuInfo)
-	return &proto_product.UpSpuResponse{}, nil
+	//var spuInfo model.PmsSpuInfo
+	//global.PmsMysqlConn.Model(&model.PmsSpuInfo{}).Where("id = ?", req.SpuId).First(&spuInfo)
+	//spuInfo.PublishStatus = 1
+	//global.PmsMysqlConn.Save(spuInfo)
+
+	// 1. 查出当前spuId对应的所有sku信息,品牌的名字
+	var skusInfo []model.PmsSkuInfo
+	global.PmsMysqlConn.Model(&model.PmsSkuInfo{}).Where("spu_id = ?", req.SpuId).Find(&skusInfo)
+	// 2. 查出当前sku的所有可以被用来检索的规格属性
+	var attrIds []int64
+	global.PmsMysqlConn.Model(&model.PmsAttr{}).Select("attr_id").Where("search_type = 1").Find(&attrIds)
+	var attrs []model.PmsProductAttrValue
+	global.PmsMysqlConn.Model(&model.PmsProductAttrValue{}).Where("spu_id = ? and attr_id in ?", req.SpuId, attrIds).Find(&attrs)
+
+	// 3.调用库存服务，查看库存
+	var skuIds = make([]int64, 0, 10)
+	for _, skuInfo := range skusInfo {
+		skuIds = append(skuIds, skuInfo.SkuId)
+	}
+	var wareRpcReq proto_ware.GetSkuHasStockRequest
+	copier.CopyWithOption(&wareRpcReq.SkuIds, &skuIds, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+	wareClient := rpc_client.GetWareRpcClient()
+	skuHasStock, err := wareClient.GetSkuHasStock(context.TODO(), &wareRpcReq)
+	// 4. 封装sku 信息
+	var esReq = make([]*proto_search.ProductStatusUpRequest_Entity, 0, 10)
+	for _, skuInfo := range skusInfo {
+		var esReqEntity proto_search.ProductStatusUpRequest_Entity
+		copier.CopyWithOption(&esReqEntity, &skuInfo, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+		esReqEntity.SkuPrice = skuInfo.Price
+		esReqEntity.HasStock = skuHasStock.SkuHasStock[skuInfo.SkuId]
+		var catalogName string
+		var brand model.PmsBrand
+		global.PmsMysqlConn.Model(&model.PmsCategory{}).Select("name").Where("cat_id = ?", skuInfo.CatalogId).First(&catalogName)
+		global.PmsMysqlConn.Model(&model.PmsBrand{}).Where("brand_id = ?", skuInfo.BrandId).First(&brand)
+		esReqEntity.BrandName = brand.Name
+		esReqEntity.BrandImg = brand.Logo
+		esReqEntity.CatalogName = catalogName
+		copier.CopyWithOption(&esReqEntity.Attrs, &attrs, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+
+		// 设置热度评分
+		esReqEntity.HotScore = 0
+		esReq = append(esReq, &esReqEntity)
+	}
+
+	// 5. 调用es服务
+	rpcClient := rpc_client.GetSearchClient()
+	_, err = rpcClient.ProductStatusUp(context.TODO(), &proto_search.ProductStatusUpRequest{
+		Entities: esReq,
+	})
+	return &proto_product.UpSpuResponse{}, err
 }
 
 func (ss *SpuService) SearchSkuInfo(ctx context.Context, req *proto_product.SearchSkuInfoRequest) (*proto_product.SearchSkuInfoResponse, error) {

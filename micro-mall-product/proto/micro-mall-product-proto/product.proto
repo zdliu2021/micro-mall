@@ -68,6 +68,26 @@ service ProductRpc {
       returns (proto_spu.GetSpuInfoResponse);
   rpc UpdateSpuAttrs(proto_spu.UpdateSpuAttrsRequest)
       returns (proto_spu.UpdateSpuAttrsResponse);
+  rpc GetSkusBySpuId(GetSkusBySpuIdRequest) returns (GetSkusBySpuIdResponse);
+}
+
+message GetSkusBySpuIdRequest { int64 spu_id = 1; }
+
+message GetSkusBySpuIdResponse {
+  message List {
+    int64 sku_id = 1;
+    int64 spu_id = 2;
+    string sku_name = 3;
+    string sku_desc = 4;
+    int64 catalog_id = 5;
+    int64 brand_id = 6;
+    string sku_default_img = 7;
+    string sku_title = 8;
+    string sku_subtitle = 9;
+    double price = 10;
+    int64 sale_count = 11;
+  }
+  repeated List lists = 1;
 }
 
 message GetAllGroupAndAttrRelatedWithCatelogRequest { int64 cat_id = 1; }
