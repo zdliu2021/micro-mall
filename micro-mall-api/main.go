@@ -2,6 +2,8 @@ package main
 
 import (
 	"github.com/gin-contrib/pprof"
+	"github.com/google/gops/agent"
+	"log"
 	"mall-demo/micro-mall-api/conf"
 	"mall-demo/micro-mall-api/global"
 	"mall-demo/micro-mall-api/router"
@@ -23,5 +25,10 @@ func main() {
 	router.InitRpcClients()
 	route := router.InitRouter()
 	pprof.Register(route, "debug/pprof")
+
+	if err := agent.Listen(agent.Options{}); err != nil {
+		log.Fatalf("agent.Listen err: %v", err)
+	}
+
 	route.Run(":8080")
 }
