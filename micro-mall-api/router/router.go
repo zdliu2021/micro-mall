@@ -20,6 +20,8 @@ func InitRouter() *gin.Engine {
 	htmlRouter := router.Group("")
 	{
 		htmlRouter.GET("login", html.Login)
+		htmlRouter.GET("index", html.Index)
+		htmlRouter.GET("search/list", html.SearchList)
 	}
 
 	// api

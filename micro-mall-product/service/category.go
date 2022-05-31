@@ -9,6 +9,8 @@ import (
 	proto_product "mall-demo/micro-mall-product/proto/micro-mall-product-proto"
 	"mall-demo/micro-mall-product/utils"
 	"mall-demo/micro-mall-product/utils/db"
+	"mall-demo/micro-mall-product/utils/idgenerator"
+	"time"
 )
 
 type CategoryService struct {
@@ -17,6 +19,23 @@ type CategoryService struct {
 func (cgy *CategoryService) ListCategoryTree(ctx context.Context, req *proto_product.ListCategoryTreeRequest) (*proto_product.ListCategoryTreeResponse, error) {
 	redisClient := db.GetRedisInstance(db.DefaultRedisOption)
 	val, err := redisClient.Get("category_tree").Result()
+	if err == nil {
+		global.GVA_LOG.Info("redis get.")
+		var res proto_product.ListCategoryTreeResponse
+		_ = json.Unmarshal([]byte(val), &res)
+		return &res, nil
+	}
+
+	// 防止缓存击穿
+	uuid := idgenerator.GetSnowflakeId()
+	for {
+		if ok, _ := redisClient.SetNX("category_lock", uuid, 30*time.Second).Result(); !ok {
+			time.Sleep(5 * time.Second)
+		} else {
+			break
+		}
+	}
+	val, err = redisClient.Get("category_tree").Result()
 	if err == nil {
 		global.GVA_LOG.Info("redis get.")
 		var res proto_product.ListCategoryTreeResponse
