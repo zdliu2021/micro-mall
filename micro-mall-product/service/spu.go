@@ -210,10 +210,10 @@ func (ss *SpuService) SearchSpuInfo(ctx context.Context, req *proto_product.Sear
 // 商品上架，刷新ES
 
 func (ss *SpuService) UpSpu(ctx context.Context, req *proto_product.UpSpuRequest) (*proto_product.UpSpuResponse, error) {
-	//var spuInfo model.PmsSpuInfo
-	//global.PmsMysqlConn.Model(&model.PmsSpuInfo{}).Where("id = ?", req.SpuId).First(&spuInfo)
-	//spuInfo.PublishStatus = 1
-	//global.PmsMysqlConn.Save(spuInfo)
+	var spuInfo model.PmsSpuInfo
+	global.PmsMysqlConn.Model(&model.PmsSpuInfo{}).Where("id = ?", req.SpuId).First(&spuInfo)
+	spuInfo.PublishStatus = 1
+	global.PmsMysqlConn.Save(spuInfo)
 
 	// 1. 查出当前spuId对应的所有sku信息,品牌的名字
 	var skusInfo []model.PmsSkuInfo

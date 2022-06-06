@@ -6,6 +6,7 @@ option go_package = "proto_search/";
 
 service SearchRpc {
   rpc ProductStatusUp(ProductStatusUpRequest) returns (ProductStatusUpResponse);
+  rpc SearchProduct(SearchProductRequest) returns (SearchProductResponse);
 }
 
 message ProductStatusUpRequest {
@@ -33,3 +34,63 @@ message ProductStatusUpRequest {
 }
 
 message ProductStatusUpResponse {}
+
+message SearchProductRequest {
+  string keyword = 1;
+  repeated int64 brand_id = 2;
+  int64 catalog_id = 3;
+  string sort = 4;
+  int32 has_stock = 5;
+  string sku_price = 6;
+  repeated string attrs = 7;
+  string page_num = 8;
+  string query_string = 9;
+}
+
+message SearchProductResponse {
+  message Entity {
+    message Attr {
+      int64 attr_id = 1;
+      string attr_name = 2;
+      string attr_value = 3;
+    }
+    int64 sku_id = 1;
+    int64 spu_id = 2;
+    string sku_title = 3;
+    double sku_price = 4;
+    int64 sale_count = 5;
+    bool has_stock = 6;
+    int64 brand_id = 7;
+    int64 catalog_id = 8;
+    string brand_name = 9;
+    string brand_img = 10;
+    string catalog_name = 11;
+    int64 hot_score = 12;
+    repeated Attr attrs = 13;
+  }
+
+  message Attr {
+    int64 attr_id = 1;
+    string attr_name = 2;
+    repeated string att_value = 3;
+  }
+
+  message Catalog {
+    int64 catalog_id = 1;
+    string catalog_name = 2;
+  }
+
+  message Brand {
+    int64 brand_id = 1;
+    string brand_name = 2;
+    string brand_img = 3;
+  }
+
+  repeated Entity products = 1;
+  int32 page_num = 2;
+  int32 total = 3; //总记录数
+  int32 total_page = 4;
+  repeated Brand brands = 5;
+  repeated Attr attrs = 6;
+  repeated Catalog catalogs = 7;
+}

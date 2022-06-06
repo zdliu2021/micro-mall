@@ -1007,10 +1007,11 @@ func SaveSpu(ctx *gin.Context) {
 		})
 	}
 	for i := 0; i < len(req.Skus); i++ {
+		price, _ := strconv.ParseFloat(req.Skus[i].Price, 64)
 		sku := proto_product.SaveSpuRequest_Skus{
 			Attr:        make([]*proto_product.SaveSpuRequest_Attr, 0, 10),
 			SkuName:     req.Skus[i].SkuName,
-			Price:       req.Skus[i].Price,
+			Price:       price,
 			SkuTitle:    req.Skus[i].SkuTitle,
 			SkuSubtitle: req.Skus[i].SkuSubtitle,
 			Descar:      req.Skus[i].Descar,

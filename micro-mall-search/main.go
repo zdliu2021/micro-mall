@@ -22,6 +22,7 @@ func main() {
 		// 设置info日志输出
 		elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
 		elastic.SetSniff(false),
+		elastic.SetTraceLog(log.New(os.Stdout, "[go-elastic] ", 0)), // <- log requests/response to stdout
 	)
 	if err != nil {
 		global.GVA_LOG.Error(err.Error())

@@ -1,6 +1,6 @@
 $(function(){
     $.getJSON("index/json/catalog.json",function (data) {
-
+        console.log("返回的数据",data)
         var ctgall=data;
         $(".header_main_left_a").each(function(){
             var ctgnums= $(this).attr("ctg-data");
@@ -19,8 +19,9 @@ $(function(){
                         var  ctg3List=ctg2["catalog3List"];
                         var len=0;
                         $.each(ctg3List,function (i,ctg3) {
-                            var cata3link = $("<a href=\"http://search.gmall.com/list.html?catalog3Id="+ctg3.id+"\" style=\"color: #999;\">" + ctg3.name + "</a>");
+                            var cata3link = $("<a href=\"http://localhost:8088/search/list.html?catalog3Id="+ctg3.id+"\" style=\"color: #999;\">" + ctg3.name + "</a>");
                             li.append(cata3link);
+                            console.log("ct3 name:",ctg3.name)
                             len=len+1+ctg3.name.length;
                         });
                         if(len>=46&&len<92){

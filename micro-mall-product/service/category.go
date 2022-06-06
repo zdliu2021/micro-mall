@@ -4,11 +4,12 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"github.com/go-redis/redis"
+	"go.uber.org/zap"
 	"mall-demo/micro-mall-product/global"
 	"mall-demo/micro-mall-product/model"
 	proto_product "mall-demo/micro-mall-product/proto/micro-mall-product-proto"
 	"mall-demo/micro-mall-product/utils"
-	"mall-demo/micro-mall-product/utils/db"
 	"mall-demo/micro-mall-product/utils/idgenerator"
 	"time"
 )
@@ -17,32 +18,51 @@ type CategoryService struct {
 }
 
 func (cgy *CategoryService) ListCategoryTree(ctx context.Context, req *proto_product.ListCategoryTreeRequest) (*proto_product.ListCategoryTreeResponse, error) {
-	redisClient := db.GetRedisInstance(db.DefaultRedisOption)
-	val, err := redisClient.Get("category_tree").Result()
+	val, err := global.GVA_REDIS.Get("category_tree").Result()
 	if err == nil {
 		global.GVA_LOG.Info("redis get.")
 		var res proto_product.ListCategoryTreeResponse
 		_ = json.Unmarshal([]byte(val), &res)
 		return &res, nil
+	} else {
+		if err == redis.Nil {
+			global.GVA_LOG.Warn("缓存不存在该数据")
+		} else {
+			global.GVA_LOG.Error("其他错误:" + err.Error())
+		}
 	}
-
+	global.GVA_LOG.Info("redis 内不存在")
 	// 防止缓存击穿
 	uuid := idgenerator.GetSnowflakeId()
+	global.GVA_LOG.Info("uuid:", zap.String("uuid", uuid))
 	for {
-		if ok, _ := redisClient.SetNX("category_lock", uuid, 30*time.Second).Result(); !ok {
+		if ok, _ := global.GVA_REDIS.SetNX("category_lock", uuid, 30*time.Second).Result(); !ok {
 			time.Sleep(5 * time.Second)
 		} else {
 			break
 		}
 	}
-	val, err = redisClient.Get("category_tree").Result()
+	global.GVA_LOG.Info("获取分布式锁成功")
+
+	defer func() {
+		//// 删除锁
+		//// 删除分布式锁
+		global.GVA_LOG.Info("删除分布式锁")
+		script := "if redis.call('GET',KEYS[1])==ARGV[1] then return redis.call('DEL',KEYS[1]) else return 0 end"
+		err = global.GVA_REDIS.Eval(script, []string{"category_lock"}, uuid).Err()
+		if err != nil {
+			global.GVA_LOG.Error("脚本错误:" + err.Error())
+		}
+	}()
+
+	val, err = global.GVA_REDIS.Get("category_tree").Result()
 	if err == nil {
 		global.GVA_LOG.Info("redis get.")
 		var res proto_product.ListCategoryTreeResponse
 		_ = json.Unmarshal([]byte(val), &res)
 		return &res, nil
 	}
-
+	global.GVA_LOG.Info("访问数据库获取数据")
 	var solve func(entity *proto_product.CategoryEntity)
 	solve = func(entity *proto_product.CategoryEntity) {
 		var children []model.PmsCategory
@@ -89,7 +109,7 @@ func (cgy *CategoryService) ListCategoryTree(ctx context.Context, req *proto_pro
 	tmp, _ := json.Marshal(proto_product.ListCategoryTreeResponse{
 		CategoryEntities: resp,
 	})
-	redisClient.Set("category_tree", tmp, 0)
+	global.GVA_REDIS.Set("category_tree", tmp, 0)
 
 	return &proto_product.ListCategoryTreeResponse{
 		CategoryEntities: resp,

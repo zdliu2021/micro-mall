@@ -3,10 +3,13 @@ package html
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/copier"
 	response2 "mall-demo/micro-mall-api/model/response"
 	proto_product "mall-demo/micro-mall-api/proto/micro-mall-product-proto"
+	proto_search "mall-demo/micro-mall-api/proto/micro-mall-search-proto"
 	rpc_client "mall-demo/micro-mall-api/rpc-client"
 	"net/http"
+	"strconv"
 )
 
 func Login(ctx *gin.Context) {
@@ -19,9 +22,62 @@ func Index(ctx *gin.Context) {
 		"categories": categories,
 	})
 }
+func IndexCatalog(ctx *gin.Context) {
+	categories := Index_GetCategory()
+	res := make(map[string][]response2.Category2D)
+	for i := 0; i < len(categories); i++ {
+		tmp := make([]response2.Category2D, 0, 10)
+		for j := 0; j < len(categories[i].Children); j++ {
+			var tmp2 response2.Category2D
+			tmp2.Catalog3List = make([]response2.Category3D, 0, 10)
+			tmp2.Id = strconv.Itoa(int(categories[i].Children[j].CatId))
+			tmp2.Name = categories[i].Children[j].Name
+			tmp2.Catalog1Id = strconv.Itoa(int(categories[i].CatId))
+			for k := 0; k < len(categories[i].Children[j].Children); k++ {
+				var tmp3 response2.Category3D
+				tmp3.Catalog2Id = strconv.Itoa(int(categories[i].Children[j].CatId))
+				tmp3.Id = strconv.Itoa(int(categories[i].Children[j].Children[k].CatId))
+				tmp3.Name = categories[i].Children[j].Children[k].Name
+				tmp2.Catalog3List = append(tmp2.Catalog3List, tmp3)
+			}
+			tmp = append(tmp, tmp2)
+		}
+		res[strconv.Itoa(int(categories[i].CatId))] = tmp
+	}
+	ctx.JSON(http.StatusOK, res)
+}
 
 func SearchList(ctx *gin.Context) {
+	rpcClient := rpc_client.GetSearchClient()
+	var req proto_search.SearchProductRequest
 
+	req.Keyword = ctx.Query("keyword")
+	req.CatalogId, _ = strconv.ParseInt(ctx.Query("catalog3Id"), 10, 64)
+	req.Sort = ctx.Query("sort")
+	hasStock, _ := strconv.Atoi(ctx.Query("hasStock"))
+	req.HasStock = int32(hasStock)
+	req.SkuPrice = ctx.Query("skuPrice")
+	pageNum, _ := strconv.Atoi(ctx.Query("pageNum"))
+	req.PageNum = int32(pageNum)
+	req.Attrs = ctx.QueryArray("attrs")
+	brandIds := ctx.QueryArray("brandId")
+	req.BrandId = make([]int64, 0, 10)
+	for i := 0; i < len(brandIds); i++ {
+		brandId, _ := strconv.ParseInt(brandIds[i], 10, 64)
+		req.BrandId = append(req.BrandId, brandId)
+	}
+
+	resp, err := rpcClient.SearchProduct(context.TODO(), &req)
+
+	if err != nil {
+		response2.FailWithMessage(err.Error(), ctx)
+		return
+	}
+	//response2.OkWithData(resp, ctx)
+	res := response2.SearchProductResponse{}
+	copier.CopyWithOption(&res, &resp, copier.Option{IgnoreEmpty: true, DeepCopy: true})
+
+	ctx.HTML(http.StatusOK, "search/list.html", gin.H{"result": res})
 }
 
 func Index_GetCategory() (res []response2.ListCategoryTreeResponse) {

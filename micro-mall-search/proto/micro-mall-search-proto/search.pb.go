@@ -105,6 +105,212 @@ func (*ProductStatusUpResponse) Descriptor() ([]byte, []int) {
 	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{1}
 }
 
+type SearchProductRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Keyword     string   `protobuf:"bytes,1,opt,name=keyword,proto3" json:"keyword,omitempty"`
+	BrandId     []int64  `protobuf:"varint,2,rep,packed,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	CatalogId   int64    `protobuf:"varint,3,opt,name=catalog_id,json=catalogId,proto3" json:"catalog_id,omitempty"`
+	Sort        string   `protobuf:"bytes,4,opt,name=sort,proto3" json:"sort,omitempty"`
+	HasStock    int32    `protobuf:"varint,5,opt,name=has_stock,json=hasStock,proto3" json:"has_stock,omitempty"`
+	SkuPrice    string   `protobuf:"bytes,6,opt,name=sku_price,json=skuPrice,proto3" json:"sku_price,omitempty"`
+	Attrs       []string `protobuf:"bytes,7,rep,name=attrs,proto3" json:"attrs,omitempty"`
+	PageNum     int32    `protobuf:"varint,8,opt,name=page_num,json=pageNum,proto3" json:"page_num,omitempty"`
+	QueryString string   `protobuf:"bytes,9,opt,name=query_string,json=queryString,proto3" json:"query_string,omitempty"`
+}
+
+func (x *SearchProductRequest) Reset() {
+	*x = SearchProductRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductRequest) ProtoMessage() {}
+
+func (x *SearchProductRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductRequest.ProtoReflect.Descriptor instead.
+func (*SearchProductRequest) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *SearchProductRequest) GetKeyword() string {
+	if x != nil {
+		return x.Keyword
+	}
+	return ""
+}
+
+func (x *SearchProductRequest) GetBrandId() []int64 {
+	if x != nil {
+		return x.BrandId
+	}
+	return nil
+}
+
+func (x *SearchProductRequest) GetCatalogId() int64 {
+	if x != nil {
+		return x.CatalogId
+	}
+	return 0
+}
+
+func (x *SearchProductRequest) GetSort() string {
+	if x != nil {
+		return x.Sort
+	}
+	return ""
+}
+
+func (x *SearchProductRequest) GetHasStock() int32 {
+	if x != nil {
+		return x.HasStock
+	}
+	return 0
+}
+
+func (x *SearchProductRequest) GetSkuPrice() string {
+	if x != nil {
+		return x.SkuPrice
+	}
+	return ""
+}
+
+func (x *SearchProductRequest) GetAttrs() []string {
+	if x != nil {
+		return x.Attrs
+	}
+	return nil
+}
+
+func (x *SearchProductRequest) GetPageNum() int32 {
+	if x != nil {
+		return x.PageNum
+	}
+	return 0
+}
+
+func (x *SearchProductRequest) GetQueryString() string {
+	if x != nil {
+		return x.QueryString
+	}
+	return ""
+}
+
+type SearchProductResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Products  []*SearchProductResponse_Entity  `protobuf:"bytes,1,rep,name=products,proto3" json:"products,omitempty"`
+	PageNum   int32                            `protobuf:"varint,2,opt,name=page_num,json=pageNum,proto3" json:"page_num,omitempty"`
+	Total     int32                            `protobuf:"varint,3,opt,name=total,proto3" json:"total,omitempty"` //总记录数
+	TotalPage int32                            `protobuf:"varint,4,opt,name=total_page,json=totalPage,proto3" json:"total_page,omitempty"`
+	Brands    []*SearchProductResponse_Brand   `protobuf:"bytes,5,rep,name=brands,proto3" json:"brands,omitempty"`
+	Attrs     []*SearchProductResponse_Attr    `protobuf:"bytes,6,rep,name=attrs,proto3" json:"attrs,omitempty"`
+	Catalogs  []*SearchProductResponse_Catalog `protobuf:"bytes,7,rep,name=catalogs,proto3" json:"catalogs,omitempty"`
+}
+
+func (x *SearchProductResponse) Reset() {
+	*x = SearchProductResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse) ProtoMessage() {}
+
+func (x *SearchProductResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *SearchProductResponse) GetProducts() []*SearchProductResponse_Entity {
+	if x != nil {
+		return x.Products
+	}
+	return nil
+}
+
+func (x *SearchProductResponse) GetPageNum() int32 {
+	if x != nil {
+		return x.PageNum
+	}
+	return 0
+}
+
+func (x *SearchProductResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+func (x *SearchProductResponse) GetTotalPage() int32 {
+	if x != nil {
+		return x.TotalPage
+	}
+	return 0
+}
+
+func (x *SearchProductResponse) GetBrands() []*SearchProductResponse_Brand {
+	if x != nil {
+		return x.Brands
+	}
+	return nil
+}
+
+func (x *SearchProductResponse) GetAttrs() []*SearchProductResponse_Attr {
+	if x != nil {
+		return x.Attrs
+	}
+	return nil
+}
+
+func (x *SearchProductResponse) GetCatalogs() []*SearchProductResponse_Catalog {
+	if x != nil {
+		return x.Catalogs
+	}
+	return nil
+}
+
 type ProductStatusUpRequest_Entity struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -128,7 +334,7 @@ type ProductStatusUpRequest_Entity struct {
 func (x *ProductStatusUpRequest_Entity) Reset() {
 	*x = ProductStatusUpRequest_Entity{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[2]
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -141,7 +347,7 @@ func (x *ProductStatusUpRequest_Entity) String() string {
 func (*ProductStatusUpRequest_Entity) ProtoMessage() {}
 
 func (x *ProductStatusUpRequest_Entity) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[2]
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -261,7 +467,7 @@ type ProductStatusUpRequest_Entity_Attr struct {
 func (x *ProductStatusUpRequest_Entity_Attr) Reset() {
 	*x = ProductStatusUpRequest_Entity_Attr{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[3]
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -274,7 +480,7 @@ func (x *ProductStatusUpRequest_Entity_Attr) String() string {
 func (*ProductStatusUpRequest_Entity_Attr) ProtoMessage() {}
 
 func (x *ProductStatusUpRequest_Entity_Attr) ProtoReflect() protoreflect.Message {
-	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[3]
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -305,6 +511,401 @@ func (x *ProductStatusUpRequest_Entity_Attr) GetAttrName() string {
 }
 
 func (x *ProductStatusUpRequest_Entity_Attr) GetAttrValue() string {
+	if x != nil {
+		return x.AttrValue
+	}
+	return ""
+}
+
+type SearchProductResponse_Entity struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SkuId       int64                                `protobuf:"varint,1,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	SpuId       int64                                `protobuf:"varint,2,opt,name=spu_id,json=spuId,proto3" json:"spu_id,omitempty"`
+	SkuTitle    string                               `protobuf:"bytes,3,opt,name=sku_title,json=skuTitle,proto3" json:"sku_title,omitempty"`
+	SkuPrice    float64                              `protobuf:"fixed64,4,opt,name=sku_price,json=skuPrice,proto3" json:"sku_price,omitempty"`
+	SaleCount   int64                                `protobuf:"varint,5,opt,name=sale_count,json=saleCount,proto3" json:"sale_count,omitempty"`
+	HasStock    bool                                 `protobuf:"varint,6,opt,name=has_stock,json=hasStock,proto3" json:"has_stock,omitempty"`
+	BrandId     int64                                `protobuf:"varint,7,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	CatalogId   int64                                `protobuf:"varint,8,opt,name=catalog_id,json=catalogId,proto3" json:"catalog_id,omitempty"`
+	BrandName   string                               `protobuf:"bytes,9,opt,name=brand_name,json=brandName,proto3" json:"brand_name,omitempty"`
+	BrandImg    string                               `protobuf:"bytes,10,opt,name=brand_img,json=brandImg,proto3" json:"brand_img,omitempty"`
+	CatalogName string                               `protobuf:"bytes,11,opt,name=catalog_name,json=catalogName,proto3" json:"catalog_name,omitempty"`
+	HotScore    int64                                `protobuf:"varint,12,opt,name=hot_score,json=hotScore,proto3" json:"hot_score,omitempty"`
+	Attrs       []*SearchProductResponse_Entity_Attr `protobuf:"bytes,13,rep,name=attrs,proto3" json:"attrs,omitempty"`
+	SkuImg      string                               `protobuf:"bytes,14,opt,name=sku_img,json=skuImg,proto3" json:"sku_img,omitempty"`
+}
+
+func (x *SearchProductResponse_Entity) Reset() {
+	*x = SearchProductResponse_Entity{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse_Entity) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse_Entity) ProtoMessage() {}
+
+func (x *SearchProductResponse_Entity) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse_Entity.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse_Entity) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3, 0}
+}
+
+func (x *SearchProductResponse_Entity) GetSkuId() int64 {
+	if x != nil {
+		return x.SkuId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetSpuId() int64 {
+	if x != nil {
+		return x.SpuId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetSkuTitle() string {
+	if x != nil {
+		return x.SkuTitle
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Entity) GetSkuPrice() float64 {
+	if x != nil {
+		return x.SkuPrice
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetSaleCount() int64 {
+	if x != nil {
+		return x.SaleCount
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetHasStock() bool {
+	if x != nil {
+		return x.HasStock
+	}
+	return false
+}
+
+func (x *SearchProductResponse_Entity) GetBrandId() int64 {
+	if x != nil {
+		return x.BrandId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetCatalogId() int64 {
+	if x != nil {
+		return x.CatalogId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetBrandName() string {
+	if x != nil {
+		return x.BrandName
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Entity) GetBrandImg() string {
+	if x != nil {
+		return x.BrandImg
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Entity) GetCatalogName() string {
+	if x != nil {
+		return x.CatalogName
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Entity) GetHotScore() int64 {
+	if x != nil {
+		return x.HotScore
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity) GetAttrs() []*SearchProductResponse_Entity_Attr {
+	if x != nil {
+		return x.Attrs
+	}
+	return nil
+}
+
+func (x *SearchProductResponse_Entity) GetSkuImg() string {
+	if x != nil {
+		return x.SkuImg
+	}
+	return ""
+}
+
+type SearchProductResponse_Attr struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AttrId    int64    `protobuf:"varint,1,opt,name=attr_id,json=attrId,proto3" json:"attr_id,omitempty"`
+	AttrName  string   `protobuf:"bytes,2,opt,name=attr_name,json=attrName,proto3" json:"attr_name,omitempty"`
+	AttrValue []string `protobuf:"bytes,3,rep,name=attr_value,json=attrValue,proto3" json:"attr_value,omitempty"`
+}
+
+func (x *SearchProductResponse_Attr) Reset() {
+	*x = SearchProductResponse_Attr{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse_Attr) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse_Attr) ProtoMessage() {}
+
+func (x *SearchProductResponse_Attr) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse_Attr.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse_Attr) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3, 1}
+}
+
+func (x *SearchProductResponse_Attr) GetAttrId() int64 {
+	if x != nil {
+		return x.AttrId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Attr) GetAttrName() string {
+	if x != nil {
+		return x.AttrName
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Attr) GetAttrValue() []string {
+	if x != nil {
+		return x.AttrValue
+	}
+	return nil
+}
+
+type SearchProductResponse_Catalog struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CatalogId   int64  `protobuf:"varint,1,opt,name=catalog_id,json=catalogId,proto3" json:"catalog_id,omitempty"`
+	CatalogName string `protobuf:"bytes,2,opt,name=catalog_name,json=catalogName,proto3" json:"catalog_name,omitempty"`
+}
+
+func (x *SearchProductResponse_Catalog) Reset() {
+	*x = SearchProductResponse_Catalog{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse_Catalog) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse_Catalog) ProtoMessage() {}
+
+func (x *SearchProductResponse_Catalog) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse_Catalog.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse_Catalog) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3, 2}
+}
+
+func (x *SearchProductResponse_Catalog) GetCatalogId() int64 {
+	if x != nil {
+		return x.CatalogId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Catalog) GetCatalogName() string {
+	if x != nil {
+		return x.CatalogName
+	}
+	return ""
+}
+
+type SearchProductResponse_Brand struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BrandId   int64  `protobuf:"varint,1,opt,name=brand_id,json=brandId,proto3" json:"brand_id,omitempty"`
+	BrandName string `protobuf:"bytes,2,opt,name=brand_name,json=brandName,proto3" json:"brand_name,omitempty"`
+	BrandImg  string `protobuf:"bytes,3,opt,name=brand_img,json=brandImg,proto3" json:"brand_img,omitempty"`
+}
+
+func (x *SearchProductResponse_Brand) Reset() {
+	*x = SearchProductResponse_Brand{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse_Brand) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse_Brand) ProtoMessage() {}
+
+func (x *SearchProductResponse_Brand) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse_Brand.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse_Brand) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3, 3}
+}
+
+func (x *SearchProductResponse_Brand) GetBrandId() int64 {
+	if x != nil {
+		return x.BrandId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Brand) GetBrandName() string {
+	if x != nil {
+		return x.BrandName
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Brand) GetBrandImg() string {
+	if x != nil {
+		return x.BrandImg
+	}
+	return ""
+}
+
+type SearchProductResponse_Entity_Attr struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AttrId    int64  `protobuf:"varint,1,opt,name=attr_id,json=attrId,proto3" json:"attr_id,omitempty"`
+	AttrName  string `protobuf:"bytes,2,opt,name=attr_name,json=attrName,proto3" json:"attr_name,omitempty"`
+	AttrValue string `protobuf:"bytes,3,opt,name=attr_value,json=attrValue,proto3" json:"attr_value,omitempty"`
+}
+
+func (x *SearchProductResponse_Entity_Attr) Reset() {
+	*x = SearchProductResponse_Entity_Attr{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *SearchProductResponse_Entity_Attr) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SearchProductResponse_Entity_Attr) ProtoMessage() {}
+
+func (x *SearchProductResponse_Entity_Attr) ProtoReflect() protoreflect.Message {
+	mi := &file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SearchProductResponse_Entity_Attr.ProtoReflect.Descriptor instead.
+func (*SearchProductResponse_Entity_Attr) Descriptor() ([]byte, []int) {
+	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescGZIP(), []int{3, 0, 0}
+}
+
+func (x *SearchProductResponse_Entity_Attr) GetAttrId() int64 {
+	if x != nil {
+		return x.AttrId
+	}
+	return 0
+}
+
+func (x *SearchProductResponse_Entity_Attr) GetAttrName() string {
+	if x != nil {
+		return x.AttrName
+	}
+	return ""
+}
+
+func (x *SearchProductResponse_Entity_Attr) GetAttrValue() string {
 	if x != nil {
 		return x.AttrValue
 	}
@@ -358,15 +959,110 @@ var file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_
 	0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x5f, 0x76, 0x61, 0x6c, 0x75,
 	0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x74, 0x74, 0x72, 0x56, 0x61, 0x6c,
 	0x75, 0x65, 0x22, 0x19, 0x0a, 0x17, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74, 0x61,
-	0x74, 0x75, 0x73, 0x55, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x32, 0x5f, 0x0a,
-	0x09, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x52, 0x70, 0x63, 0x12, 0x52, 0x0a, 0x0f, 0x50, 0x72,
-	0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x55, 0x70, 0x12, 0x1e, 0x2e,
-	0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x55, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e,
-	0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x55, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0f,
-	0x5a, 0x0d, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x5f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2f, 0x62,
-	0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x74, 0x75, 0x73, 0x55, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x8c, 0x02,
+	0x0a, 0x14, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6b, 0x65, 0x79, 0x77, 0x6f, 0x72, 0x64,
+	0x12, 0x19, 0x0a, 0x08, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x03,
+	0x28, 0x03, 0x52, 0x07, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x63,
+	0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52,
+	0x09, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x73, 0x6f,
+	0x72, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x73, 0x6f, 0x72, 0x74, 0x12, 0x1b,
+	0x0a, 0x09, 0x68, 0x61, 0x73, 0x5f, 0x73, 0x74, 0x6f, 0x63, 0x6b, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x05, 0x52, 0x08, 0x68, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63, 0x6b, 0x12, 0x1b, 0x0a, 0x09, 0x73,
+	0x6b, 0x75, 0x5f, 0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x73, 0x6b, 0x75, 0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x61, 0x74, 0x74, 0x72,
+	0x73, 0x18, 0x07, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05, 0x61, 0x74, 0x74, 0x72, 0x73, 0x12, 0x19,
+	0x0a, 0x08, 0x70, 0x61, 0x67, 0x65, 0x5f, 0x6e, 0x75, 0x6d, 0x18, 0x08, 0x20, 0x01, 0x28, 0x05,
+	0x52, 0x07, 0x70, 0x61, 0x67, 0x65, 0x4e, 0x75, 0x6d, 0x12, 0x21, 0x0a, 0x0c, 0x71, 0x75, 0x65,
+	0x72, 0x79, 0x5f, 0x73, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0b, 0x71, 0x75, 0x65, 0x72, 0x79, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x22, 0x89, 0x09, 0x0a,
+	0x15, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x40, 0x0a, 0x08, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63,
+	0x74, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x24, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63,
+	0x68, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x52, 0x08,
+	0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x12, 0x19, 0x0a, 0x08, 0x70, 0x61, 0x67, 0x65,
+	0x5f, 0x6e, 0x75, 0x6d, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x07, 0x70, 0x61, 0x67, 0x65,
+	0x4e, 0x75, 0x6d, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x05, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x6f, 0x74,
+	0x61, 0x6c, 0x5f, 0x70, 0x61, 0x67, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x74,
+	0x6f, 0x74, 0x61, 0x6c, 0x50, 0x61, 0x67, 0x65, 0x12, 0x3b, 0x0a, 0x06, 0x62, 0x72, 0x61, 0x6e,
+	0x64, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63,
+	0x68, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x42, 0x72, 0x61, 0x6e, 0x64, 0x52, 0x06, 0x62,
+	0x72, 0x61, 0x6e, 0x64, 0x73, 0x12, 0x38, 0x0a, 0x05, 0x61, 0x74, 0x74, 0x72, 0x73, 0x18, 0x06,
+	0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x53, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x2e, 0x41, 0x74, 0x74, 0x72, 0x52, 0x05, 0x61, 0x74, 0x74, 0x72, 0x73, 0x12,
+	0x41, 0x0a, 0x08, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x73, 0x18, 0x07, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x25, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63,
+	0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x2e, 0x43, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x52, 0x08, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f,
+	0x67, 0x73, 0x1a, 0x99, 0x04, 0x0a, 0x06, 0x45, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x12, 0x15, 0x0a,
+	0x06, 0x73, 0x6b, 0x75, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x73,
+	0x6b, 0x75, 0x49, 0x64, 0x12, 0x15, 0x0a, 0x06, 0x73, 0x70, 0x75, 0x5f, 0x69, 0x64, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x73, 0x70, 0x75, 0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x73,
+	0x6b, 0x75, 0x5f, 0x74, 0x69, 0x74, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x73, 0x6b, 0x75, 0x54, 0x69, 0x74, 0x6c, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x73, 0x6b, 0x75, 0x5f,
+	0x70, 0x72, 0x69, 0x63, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x01, 0x52, 0x08, 0x73, 0x6b, 0x75,
+	0x50, 0x72, 0x69, 0x63, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x61, 0x6c, 0x65, 0x5f, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x73, 0x61, 0x6c, 0x65, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1b, 0x0a, 0x09, 0x68, 0x61, 0x73, 0x5f, 0x73, 0x74, 0x6f, 0x63,
+	0x6b, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x08, 0x68, 0x61, 0x73, 0x53, 0x74, 0x6f, 0x63,
+	0x6b, 0x12, 0x19, 0x0a, 0x08, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x07, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x07, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
+	0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x5f, 0x69, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x09, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a, 0x62,
+	0x72, 0x61, 0x6e, 0x64, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x62, 0x72,
+	0x61, 0x6e, 0x64, 0x5f, 0x69, 0x6d, 0x67, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x62,
+	0x72, 0x61, 0x6e, 0x64, 0x49, 0x6d, 0x67, 0x12, 0x21, 0x0a, 0x0c, 0x63, 0x61, 0x74, 0x61, 0x6c,
+	0x6f, 0x67, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63,
+	0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x68, 0x6f,
+	0x74, 0x5f, 0x73, 0x63, 0x6f, 0x72, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x03, 0x52, 0x08, 0x68,
+	0x6f, 0x74, 0x53, 0x63, 0x6f, 0x72, 0x65, 0x12, 0x3f, 0x0a, 0x05, 0x61, 0x74, 0x74, 0x72, 0x73,
+	0x18, 0x0d, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x29, 0x2e, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2e,
+	0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x2e, 0x45, 0x6e, 0x74, 0x69, 0x74, 0x79, 0x2e, 0x41, 0x74, 0x74,
+	0x72, 0x52, 0x05, 0x61, 0x74, 0x74, 0x72, 0x73, 0x12, 0x17, 0x0a, 0x07, 0x73, 0x6b, 0x75, 0x5f,
+	0x69, 0x6d, 0x67, 0x18, 0x0e, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x6b, 0x75, 0x49, 0x6d,
+	0x67, 0x1a, 0x5b, 0x0a, 0x04, 0x41, 0x74, 0x74, 0x72, 0x12, 0x17, 0x0a, 0x07, 0x61, 0x74, 0x74,
+	0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x74, 0x74, 0x72,
+	0x49, 0x64, 0x12, 0x1b, 0x0a, 0x09, 0x61, 0x74, 0x74, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x61, 0x74, 0x74, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12,
+	0x1d, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x09, 0x61, 0x74, 0x74, 0x72, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x1a, 0x5b,
+	0x0a, 0x04, 0x41, 0x74, 0x74, 0x72, 0x12, 0x17, 0x0a, 0x07, 0x61, 0x74, 0x74, 0x72, 0x5f, 0x69,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x74, 0x74, 0x72, 0x49, 0x64, 0x12,
+	0x1b, 0x0a, 0x09, 0x61, 0x74, 0x74, 0x72, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x61, 0x74, 0x74, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1d, 0x0a, 0x0a,
+	0x61, 0x74, 0x74, 0x72, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x09, 0x61, 0x74, 0x74, 0x72, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x1a, 0x4b, 0x0a, 0x07, 0x43,
+	0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f,
+	0x67, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x61, 0x74, 0x61,
+	0x6c, 0x6f, 0x67, 0x49, 0x64, 0x12, 0x21, 0x0a, 0x0c, 0x63, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67,
+	0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x61, 0x74,
+	0x61, 0x6c, 0x6f, 0x67, 0x4e, 0x61, 0x6d, 0x65, 0x1a, 0x5e, 0x0a, 0x05, 0x42, 0x72, 0x61, 0x6e,
+	0x64, 0x12, 0x19, 0x0a, 0x08, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x07, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x49, 0x64, 0x12, 0x1d, 0x0a, 0x0a,
+	0x62, 0x72, 0x61, 0x6e, 0x64, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x62, 0x72, 0x61, 0x6e, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1b, 0x0a, 0x09, 0x62,
+	0x72, 0x61, 0x6e, 0x64, 0x5f, 0x69, 0x6d, 0x67, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x62, 0x72, 0x61, 0x6e, 0x64, 0x49, 0x6d, 0x67, 0x32, 0xad, 0x01, 0x0a, 0x09, 0x53, 0x65, 0x61,
+	0x72, 0x63, 0x68, 0x52, 0x70, 0x63, 0x12, 0x52, 0x0a, 0x0f, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63,
+	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x55, 0x70, 0x12, 0x1e, 0x2e, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x55, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x55, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x4c, 0x0a, 0x0d, 0x53, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x12, 0x1c, 0x2e, 0x73, 0x65,
+	0x61, 0x72, 0x63, 0x68, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75,
+	0x63, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x73, 0x65, 0x61, 0x72,
+	0x63, 0x68, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x0f, 0x5a, 0x0d, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x5f, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x2f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -381,23 +1077,37 @@ func file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto
 	return file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDescData
 }
 
-var file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_goTypes = []interface{}{
 	(*ProductStatusUpRequest)(nil),             // 0: search.ProductStatusUpRequest
 	(*ProductStatusUpResponse)(nil),            // 1: search.ProductStatusUpResponse
-	(*ProductStatusUpRequest_Entity)(nil),      // 2: search.ProductStatusUpRequest.Entity
-	(*ProductStatusUpRequest_Entity_Attr)(nil), // 3: search.ProductStatusUpRequest.Entity.Attr
+	(*SearchProductRequest)(nil),               // 2: search.SearchProductRequest
+	(*SearchProductResponse)(nil),              // 3: search.SearchProductResponse
+	(*ProductStatusUpRequest_Entity)(nil),      // 4: search.ProductStatusUpRequest.Entity
+	(*ProductStatusUpRequest_Entity_Attr)(nil), // 5: search.ProductStatusUpRequest.Entity.Attr
+	(*SearchProductResponse_Entity)(nil),       // 6: search.SearchProductResponse.Entity
+	(*SearchProductResponse_Attr)(nil),         // 7: search.SearchProductResponse.Attr
+	(*SearchProductResponse_Catalog)(nil),      // 8: search.SearchProductResponse.Catalog
+	(*SearchProductResponse_Brand)(nil),        // 9: search.SearchProductResponse.Brand
+	(*SearchProductResponse_Entity_Attr)(nil),  // 10: search.SearchProductResponse.Entity.Attr
 }
 var file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_depIdxs = []int32{
-	2, // 0: search.ProductStatusUpRequest.entities:type_name -> search.ProductStatusUpRequest.Entity
-	3, // 1: search.ProductStatusUpRequest.Entity.attrs:type_name -> search.ProductStatusUpRequest.Entity.Attr
-	0, // 2: search.SearchRpc.ProductStatusUp:input_type -> search.ProductStatusUpRequest
-	1, // 3: search.SearchRpc.ProductStatusUp:output_type -> search.ProductStatusUpResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4,  // 0: search.ProductStatusUpRequest.entities:type_name -> search.ProductStatusUpRequest.Entity
+	6,  // 1: search.SearchProductResponse.products:type_name -> search.SearchProductResponse.Entity
+	9,  // 2: search.SearchProductResponse.brands:type_name -> search.SearchProductResponse.Brand
+	7,  // 3: search.SearchProductResponse.attrs:type_name -> search.SearchProductResponse.Attr
+	8,  // 4: search.SearchProductResponse.catalogs:type_name -> search.SearchProductResponse.Catalog
+	5,  // 5: search.ProductStatusUpRequest.Entity.attrs:type_name -> search.ProductStatusUpRequest.Entity.Attr
+	10, // 6: search.SearchProductResponse.Entity.attrs:type_name -> search.SearchProductResponse.Entity.Attr
+	0,  // 7: search.SearchRpc.ProductStatusUp:input_type -> search.ProductStatusUpRequest
+	2,  // 8: search.SearchRpc.SearchProduct:input_type -> search.SearchProductRequest
+	1,  // 9: search.SearchRpc.ProductStatusUp:output_type -> search.ProductStatusUpResponse
+	3,  // 10: search.SearchRpc.SearchProduct:output_type -> search.SearchProductResponse
+	9,  // [9:11] is the sub-list for method output_type
+	7,  // [7:9] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_init() }
@@ -431,7 +1141,7 @@ func file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto
 			}
 		}
 		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductStatusUpRequest_Entity); i {
+			switch v := v.(*SearchProductRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -443,7 +1153,91 @@ func file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto
 			}
 		}
 		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProductStatusUpRequest_Entity); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ProductStatusUpRequest_Entity_Attr); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse_Entity); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse_Attr); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse_Catalog); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse_Brand); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SearchProductResponse_Entity_Attr); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -461,7 +1255,7 @@ func file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_mall_demo_micro_mall_search_proto_micro_mall_search_proto_search_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

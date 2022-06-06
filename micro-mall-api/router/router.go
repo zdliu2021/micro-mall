@@ -21,7 +21,8 @@ func InitRouter() *gin.Engine {
 	{
 		htmlRouter.GET("login", html.Login)
 		htmlRouter.GET("index", html.Index)
-		htmlRouter.GET("search/list", html.SearchList)
+		htmlRouter.GET("search/list.html", html.SearchList)
+		htmlRouter.GET("index/json/catalog.json", html.IndexCatalog)
 	}
 
 	// api
@@ -135,7 +136,7 @@ func InitRpcClients() {
 	rpc_client.InitMemberClient()
 	rpc_client.InitCouponClient()
 	rpc_client.InitWareRpcClient()
-	//rpc-client.InitOrderClient()
+	rpc_client.InitSearchClient()
 	rpc_client.InitProductClient()
 	rpc_client.InitThirdPartyClient()
 }

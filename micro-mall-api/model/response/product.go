@@ -209,3 +209,16 @@ type ListSkuResponse struct {
 		SaleCount     int         `json:"saleCount"`
 	} `json:"list"`
 }
+
+type Category3D struct {
+	Catalog2Id string `json:"catalog2Id"`
+	Id         string `json:"id"`
+	Name       string `json:"name"`
+}
+
+type Category2D struct {
+	Catalog1Id   string       `json:"Catalog1Id"`
+	Catalog3List []Category3D `json:"catalog3List"`
+	Id           string       `json:"id"`
+	Name         string       `json:"name"`
+}

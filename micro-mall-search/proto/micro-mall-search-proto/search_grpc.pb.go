@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SearchRpcClient interface {
 	ProductStatusUp(ctx context.Context, in *ProductStatusUpRequest, opts ...grpc.CallOption) (*ProductStatusUpResponse, error)
+	SearchProduct(ctx context.Context, in *SearchProductRequest, opts ...grpc.CallOption) (*SearchProductResponse, error)
 }
 
 type searchRpcClient struct {
@@ -42,11 +43,21 @@ func (c *searchRpcClient) ProductStatusUp(ctx context.Context, in *ProductStatus
 	return out, nil
 }
 
+func (c *searchRpcClient) SearchProduct(ctx context.Context, in *SearchProductRequest, opts ...grpc.CallOption) (*SearchProductResponse, error) {
+	out := new(SearchProductResponse)
+	err := c.cc.Invoke(ctx, "/search.SearchRpc/SearchProduct", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SearchRpcServer is the server API for SearchRpc service.
 // All implementations must embed UnimplementedSearchRpcServer
 // for forward compatibility
 type SearchRpcServer interface {
 	ProductStatusUp(context.Context, *ProductStatusUpRequest) (*ProductStatusUpResponse, error)
+	SearchProduct(context.Context, *SearchProductRequest) (*SearchProductResponse, error)
 	mustEmbedUnimplementedSearchRpcServer()
 }
 
@@ -56,6 +67,9 @@ type UnimplementedSearchRpcServer struct {
 
 func (UnimplementedSearchRpcServer) ProductStatusUp(context.Context, *ProductStatusUpRequest) (*ProductStatusUpResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ProductStatusUp not implemented")
+}
+func (UnimplementedSearchRpcServer) SearchProduct(context.Context, *SearchProductRequest) (*SearchProductResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchProduct not implemented")
 }
 func (UnimplementedSearchRpcServer) mustEmbedUnimplementedSearchRpcServer() {}
 
@@ -88,6 +102,24 @@ func _SearchRpc_ProductStatusUp_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SearchRpc_SearchProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SearchRpcServer).SearchProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/search.SearchRpc/SearchProduct",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SearchRpcServer).SearchProduct(ctx, req.(*SearchProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SearchRpc_ServiceDesc is the grpc.ServiceDesc for SearchRpc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +130,10 @@ var SearchRpc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ProductStatusUp",
 			Handler:    _SearchRpc_ProductStatusUp_Handler,
+		},
+		{
+			MethodName: "SearchProduct",
+			Handler:    _SearchRpc_SearchProduct_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

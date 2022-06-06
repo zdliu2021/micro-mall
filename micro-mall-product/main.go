@@ -11,6 +11,7 @@ import (
 func main() {
 	global.GVA_CONFIG = conf.ReadConfig()
 	global.GVA_LOG = utils.Zap()
+	global.GVA_REDIS = db.GetRedisInstance(db.DefaultRedisOption)
 	global.PmsMysqlConn = db.InitMysqlClient()
 	db.InitMysqlTables()
 

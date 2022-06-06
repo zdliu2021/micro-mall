@@ -76,6 +76,18 @@ services:
     networks:
       - mall
 
+  nginx:
+    restart: always
+    container_name: nginx
+    image: nginx
+    ports:
+      - 8889:8888
+    volumes: #数据卷映射地址
+      - nginx_conf:/etc/nginx/conf.d/
+      - nginx_data:/etc/nginx
+    networks:
+      - mall
+
 volumes:
   es_data:
     driver: local
@@ -87,6 +99,11 @@ volumes:
     driver: local
   redis_data:
     driver: local
+  nginx_conf:
+    driver: local
+  nginx_data:
+    driver: local
+
 
 networks:
   mall:

@@ -108,10 +108,10 @@ type SaveSPU struct {
 			AttrName  string `json:"attrName"`
 			AttrValue string `json:"attrValue"`
 		} `json:"attr"`
-		SkuName     string  `json:"skuName"`
-		Price       float64 `json:"price"`
-		SkuTitle    string  `json:"skuTitle"`
-		SkuSubtitle string  `json:"skuSubtitle"`
+		SkuName     string `json:"skuName"`
+		Price       string `json:"price"`
+		SkuTitle    string `json:"skuTitle"`
+		SkuSubtitle string `json:"skuSubtitle"`
 		Images      []struct {
 			ImgURL     string `json:"imgUrl"`
 			DefaultImg int32  `json:"defaultImg"`
