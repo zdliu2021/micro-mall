@@ -63,6 +63,7 @@ type ProductRpcClient interface {
 	SearchSkuInfo(ctx context.Context, in *SearchSkuInfoRequest, opts ...grpc.CallOption) (*SearchSkuInfoResponse, error)
 	GetSpuInfo(ctx context.Context, in *GetSpuInfoRequest, opts ...grpc.CallOption) (*GetSpuInfoResponse, error)
 	UpdateSpuAttrs(ctx context.Context, in *UpdateSpuAttrsRequest, opts ...grpc.CallOption) (*UpdateSpuAttrsResponse, error)
+	GetSkuItem(ctx context.Context, in *GetSkuItemRequest, opts ...grpc.CallOption) (*GetSkuItemResponse, error)
 }
 
 type productRpcClient struct {
@@ -397,6 +398,15 @@ func (c *productRpcClient) UpdateSpuAttrs(ctx context.Context, in *UpdateSpuAttr
 	return out, nil
 }
 
+func (c *productRpcClient) GetSkuItem(ctx context.Context, in *GetSkuItemRequest, opts ...grpc.CallOption) (*GetSkuItemResponse, error) {
+	out := new(GetSkuItemResponse)
+	err := c.cc.Invoke(ctx, "/proto.ProductRpc/GetSkuItem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProductRpcServer is the server API for ProductRpc service.
 // All implementations must embed UnimplementedProductRpcServer
 // for forward compatibility
@@ -442,6 +452,7 @@ type ProductRpcServer interface {
 	SearchSkuInfo(context.Context, *SearchSkuInfoRequest) (*SearchSkuInfoResponse, error)
 	GetSpuInfo(context.Context, *GetSpuInfoRequest) (*GetSpuInfoResponse, error)
 	UpdateSpuAttrs(context.Context, *UpdateSpuAttrsRequest) (*UpdateSpuAttrsResponse, error)
+	GetSkuItem(context.Context, *GetSkuItemRequest) (*GetSkuItemResponse, error)
 	mustEmbedUnimplementedProductRpcServer()
 }
 
@@ -556,6 +567,9 @@ func (UnimplementedProductRpcServer) GetSpuInfo(context.Context, *GetSpuInfoRequ
 }
 func (UnimplementedProductRpcServer) UpdateSpuAttrs(context.Context, *UpdateSpuAttrsRequest) (*UpdateSpuAttrsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateSpuAttrs not implemented")
+}
+func (UnimplementedProductRpcServer) GetSkuItem(context.Context, *GetSkuItemRequest) (*GetSkuItemResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSkuItem not implemented")
 }
 func (UnimplementedProductRpcServer) mustEmbedUnimplementedProductRpcServer() {}
 
@@ -1218,6 +1232,24 @@ func _ProductRpc_UpdateSpuAttrs_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ProductRpc_GetSkuItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSkuItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ProductRpcServer).GetSkuItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.ProductRpc/GetSkuItem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ProductRpcServer).GetSkuItem(ctx, req.(*GetSkuItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ProductRpc_ServiceDesc is the grpc.ServiceDesc for ProductRpc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1368,6 +1400,10 @@ var ProductRpc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateSpuAttrs",
 			Handler:    _ProductRpc_UpdateSpuAttrs_Handler,
+		},
+		{
+			MethodName: "GetSkuItem",
+			Handler:    _ProductRpc_GetSkuItem_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

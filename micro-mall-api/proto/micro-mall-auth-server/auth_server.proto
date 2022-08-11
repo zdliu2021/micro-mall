@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package auth_server;
+
+option go_package = "proto_auth_server/";
+
+service AuthServerRpc {
+  rpc SendCode(SendCodeRequest) returns (SendCodeResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc OAuthGitteSuccess(OAuthGitteSuccessRequest)
+      returns (OAuthGitteSuccessResponse);
+}
+
+message OAuthGitteSuccessRequest { string code = 1; }
+
+message OAuthGitteSuccessResponse {
+  int64 id = 1;
+  string user_name = 2;
+}
+message SendCodeRequest { string phone_number = 1; }
+
+message SendCodeResponse {}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string phone_number = 3;
+  string code = 4;
+}
+
+message RegisterResponse {}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {}

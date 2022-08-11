@@ -151,3 +151,7 @@ func (s *Server) GetSpuInfo(ctx context.Context, req *proto_product.GetSpuInfoRe
 func (s *Server) UpdateSkuAttrs(ctx context.Context, req *proto_product.UpdateSpuAttrsRequest) (*proto_product.UpdateSpuAttrsResponse, error) {
 	return s.spuService.UpdateSpuAttrs(ctx, req)
 }
+
+func (s *Server) GetSkuItem(ctx context.Context, req *proto_product.GetSkuItemRequest) (*proto_product.GetSkuItemResponse, error) {
+	return s.spuService.GetSkuItem(ctx, req)
+}

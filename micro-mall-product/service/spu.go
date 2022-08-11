@@ -302,3 +302,13 @@ func (ss *SpuService) UpdateSpuAttrs(ctx context.Context, req *proto_product.Upd
 	}
 	return &proto_product.UpdateSpuAttrsResponse{}, nil
 }
+
+func (ss *SpuService) GetSkuItem(ctx context.Context, req *proto_product.GetSkuItemRequest) (*proto_product.GetSkuItemResponse, error) {
+	info := proto_product.GetSkuItemResponse_SkuInfoEntity{}
+	skuInfo := model.PmsSkuInfo{}
+	global.PmsMysqlConn.Model(&model.PmsSkuInfo{}).Where("sku_id = ?", req.SkuId).First(&skuInfo)
+	images := make([]proto_product.GetSkuItemResponse_SkuImagesEntity, 0, 10)
+	global.PmsMysqlConn.Model(&model.PmsSkuImages{}).Where("sku_id = ?", req.SkuId).Find(&images)
+	fmt.Println(info)
+	return &proto_product.GetSkuItemResponse{}, nil
+}

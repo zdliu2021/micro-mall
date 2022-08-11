@@ -55,6 +55,7 @@ type UmsMember struct {
 	Growth      int       `gorm:"column:growth;type:int(11)" json:"growth"`                       // 成长值
 	Status      int       `gorm:"column:status;type:tinyint(4)" json:"status"`                    // 启用状态
 	CreateTime  time.Time `gorm:"column:create_time;type:datetime" json:"create_time"`            // 注册时间
+	SocialID    int64     `gorm:"column:social_id;type:bigint(20);AUTO_INCREMENT" json:"social_id"`
 }
 
 func (m *UmsMember) TableName() string {

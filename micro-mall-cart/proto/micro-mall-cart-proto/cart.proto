@@ -1,0 +1,6 @@
+syntax = "proto3";
+package proto_cart;
+
+option go_package = "proto_cart/";
+
+service CartRpc {}

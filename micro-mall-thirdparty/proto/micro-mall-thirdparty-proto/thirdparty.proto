@@ -6,6 +6,7 @@ option go_package = "proto_thirdparty/";
 
 service ThirdPartyRpc {
   rpc GetOSSToken(GetOSSTokenRequest) returns (GetOSSTokenResponse);
+  rpc SendSms(SendSmsRequest) returns (SendSmsResponse);
 }
 
 message GetOSSTokenRequest {}
@@ -19,3 +20,10 @@ message GetOSSTokenResponse {
   string dir = 6;
   string callback = 7;
 }
+
+message SendSmsRequest {
+  string phone_number = 1;
+  string code = 2;
+}
+
+message SendSmsResponse {}

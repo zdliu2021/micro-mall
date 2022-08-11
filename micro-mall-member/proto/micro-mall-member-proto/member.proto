@@ -18,7 +18,33 @@ service MemberRpc {
   rpc SaveMember(SaveMemberRequest) returns (SaveMemberResponse);
   rpc UpdateMember(UpdateMemberRequest) returns (UpdateMemberResponse);
   rpc DeleteMember(DeleteMemberRequest) returns (DeleteMemberResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc SocialLogin(SocialRequest) returns (SocialResponse);
 }
+
+message SocialRequest { string access_token = 1; }
+
+message SocialResponse {
+  int64 id = 1;
+  string user_name = 2;
+}
+
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {}
+
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string phone_number = 3;
+}
+
+message RegisterResponse {}
+
 message GetMemberListRequest {
   int32 page_num = 1;  // 当前页码
   int32 page_size = 2; //每页记录数

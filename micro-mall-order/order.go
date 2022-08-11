@@ -75,7 +75,7 @@ func RegisterNacos(addr string) {
 	ip := strings.Split(addr, ":")[0]
 	port, _ := strconv.ParseUint(strings.Split(addr, ":")[1], 10, 64)
 
-	global.GVA_LOG.Info("register order instance", zap.Any("ip", ip), zap.Any("port", port))
+	global.GVA_LOG.Info("reg order instance", zap.Any("ip", ip), zap.Any("port", port))
 
 	success, err := namingClient.RegisterInstance(vo.RegisterInstanceParam{
 		Ip:          ip,

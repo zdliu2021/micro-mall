@@ -1,0 +1,126 @@
+syntax = "proto3";
+package proto;
+
+option go_package = "proto_member/";
+
+service MemberRpc {
+  // memberLevel
+  rpc GetMemberLevelList(GetMemberLevelListRequest)
+      returns (GetMemberLevelListResponse);
+  rpc SaveMemberLevel(SaveMemberLevelRequest) returns (SaveMemberLevelResponse);
+  rpc UpdateMemberLevel(UpdateMemberLevelRequest)
+      returns (UpdateMemberLevelResponse);
+  rpc DeleteMemberLevel(DeleteMemberLevelRequest)
+      returns (DeleteMemberLevelResponse);
+
+  // micro-mall-micro-mall-member-proto
+  rpc GetMemberList(GetMemberListRequest) returns (GetMemberListResponse);
+  rpc SaveMember(SaveMemberRequest) returns (SaveMemberResponse);
+  rpc UpdateMember(UpdateMemberRequest) returns (UpdateMemberResponse);
+  rpc DeleteMember(DeleteMemberRequest) returns (DeleteMemberResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc SocialLogin(SocialRequest) returns (SocialResponse);
+}
+
+message SocialRequest { string access_token = 1; }
+
+message SocialResponse {
+  int64 id = 1;
+  string user_name = 2;
+}
+message LoginRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse {}
+message RegisterRequest {
+  string username = 1;
+  string password = 2;
+  string phone_number = 3;
+}
+
+message RegisterResponse {}
+
+message GetMemberListRequest {
+  int32 page_num = 1;  // 当前页码
+  int32 page_size = 2; //每页记录数
+  string keyword = 3;  //检索关键字
+  string order = 4;    //排序方式
+  string sidx = 5;     // 排序字段
+}
+message MemberEntity {
+  int64 id = 1;           // id
+  int64 level_id = 2;     // 会员等级ID
+  string user_name = 3;   // 用户名
+  string password = 4;    // 密码
+  string nickname = 5;    // 昵称
+  string mobile = 6;      // 手机号码
+  string email = 7;       // 邮箱
+  string header = 8;      // 头像
+  int32 gender = 9;       // 性别
+  string birth = 10;      // 生日
+  string city = 11;       // 所在城市
+  string job = 12;        // 职业
+  string sign = 13;       // 个性签名
+  int32 source_type = 14; // 用户来源
+  int32 integration = 15; // 积分
+  int32 growth = 16;      // 成长值
+  int32 status = 17;      // 启用状态
+}
+message GetMemberListResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated MemberEntity member_entities = 5;
+}
+
+message SaveMemberRequest { MemberEntity member_entity = 1; }
+message SaveMemberResponse {}
+
+message UpdateMemberRequest { MemberEntity member_entity = 1; }
+message UpdateMemberResponse {}
+
+message DeleteMemberRequest { repeated int64 ids = 1; }
+
+message DeleteMemberResponse {}
+
+message SaveMemberLevelRequest { MemberLevelEntity member_level_entity = 1; }
+
+message SaveMemberLevelResponse {}
+
+message UpdateMemberLevelRequest { MemberLevelEntity member_level_entity = 1; }
+message UpdateMemberLevelResponse {}
+
+message DeleteMemberLevelRequest { repeated int64 ids = 1; }
+message DeleteMemberLevelResponse {}
+
+message GetMemberLevelListRequest {
+  int32 page_num = 1;  // 当前页码
+  int32 page_size = 2; //每页记录数
+  string keyword = 3;  //检索关键字
+  string order = 4;    //排序方式
+  string sidx = 5;     // 排序字段
+}
+
+message MemberLevelEntity {
+  int64 id = 1;
+  string name = 2;
+  int32 growth_point = 3;
+  int32 default_status = 4;
+  float free_freight_point = 5;
+  int32 comment_growth_point = 6;
+  int32 priviledge_free_freight = 7;
+  int32 priviledge_member_price = 8;
+  int32 priviledge_birthday = 9;
+  string note = 10;
+}
+message GetMemberLevelListResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated MemberLevelEntity member_level_entities = 5;
+}

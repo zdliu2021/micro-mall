@@ -1,28 +1,48 @@
 package router
 
 import (
+	"github.com/gin-contrib/sessions"
+	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
 	"mall-demo/micro-mall-api/middleware"
 	"mall-demo/micro-mall-api/router/api/v1"
 	"mall-demo/micro-mall-api/router/html"
 	rpc_client "mall-demo/micro-mall-api/rpc-client"
+	"time"
 )
 
 func InitRouter() *gin.Engine {
 	router := gin.Default()
 	// 开启跨域
 	router.Use(middleware.Cors())
-	//router.Use(middleware.RateLimitMiddleware(time.Second, 100, 100))
+	router.Use(middleware.RateLimitMiddleware(time.Second, 100, 100))
+
+	// 设置session
+	store, _ := redis.NewStore(10, "tcp", "localhost:6399", "", []byte("secret"))
+	store.Options(sessions.Options{
+		Domain: "127.0.0.1",
+	})
+	router.Use(sessions.Sessions("sessionid", store))
 
 	// HTML
 	router.LoadHTMLGlob("templates/**/*.html")
 	router.Static("/assets", "templates/")
 	htmlRouter := router.Group("")
 	{
-		htmlRouter.GET("login", html.Login)
-		htmlRouter.GET("index", html.Index)
+		htmlRouter.GET("login.html", html.Login)
+		htmlRouter.GET("index.html", html.Index)
+		htmlRouter.GET("reg.html", html.Reg)
 		htmlRouter.GET("search/list.html", html.SearchList)
 		htmlRouter.GET("index/json/catalog.json", html.IndexCatalog)
+		htmlRouter.GET("item/:skuId", html.SkuItem)
+	}
+
+	frontend_route := router.Group("")
+	{
+		frontend_route.GET("sms/sendCode", v1.SendCode)
+		frontend_route.POST("register", v1.Register)
+		frontend_route.POST("login", v1.Login)
+		frontend_route.GET("oauth2/gitte/success", v1.OAuthGitteSuccess)
 	}
 
 	// api
@@ -133,10 +153,11 @@ func InitRouter() *gin.Engine {
 }
 
 func InitRpcClients() {
-	rpc_client.InitMemberClient()
-	rpc_client.InitCouponClient()
+	rpc_client.InitMemberRpcClient()
+	rpc_client.InitCouponRpcClient()
 	rpc_client.InitWareRpcClient()
-	rpc_client.InitSearchClient()
-	rpc_client.InitProductClient()
-	rpc_client.InitThirdPartyClient()
+	rpc_client.InitSearchRpcClient()
+	rpc_client.InitProductRpcClient()
+	rpc_client.InitThirdPartyRpcClient()
+	rpc_client.InitAuthServerRpcClient()
 }

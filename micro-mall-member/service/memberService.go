@@ -2,9 +2,16 @@ package service
 
 import (
 	"context"
+	"crypto/md5"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"io/ioutil"
 	"mall-demo/micro-mall-member/global"
 	"mall-demo/micro-mall-member/model"
 	proto_member "mall-demo/micro-mall-member/proto/micro-mall-member-proto"
+	"net/http"
 	"time"
 )
 
@@ -96,4 +103,69 @@ func (obj *MemberService) UpdateMember(ctx context.Context, req *proto_member.Up
 func (obj *MemberService) DeleteMember(ctx context.Context, req *proto_member.DeleteMemberRequest) (*proto_member.DeleteMemberResponse, error) {
 	global.UmsMysqlConn.Delete(&model.UmsMember{}, req.Ids)
 	return &proto_member.DeleteMemberResponse{}, nil
+}
+
+func (obj *MemberService) Register(ctx context.Context, req *proto_member.RegisterRequest) (*proto_member.RegisterResponse, error) {
+	var memberEntity model.UmsMember
+	memberEntity.Username = req.Username
+
+	// 密码加密,
+	// TODO 盐值加密
+	m := md5.New()
+	m.Write([]byte(req.Password))
+	memberEntity.Password = hex.EncodeToString(m.Sum(nil))
+	memberEntity.Mobile = req.PhoneNumber
+	memberEntity.Birth = time.Now()
+	memberEntity.CreateTime = time.Now()
+	global.UmsMysqlConn.Model(&model.UmsMember{}).Create(&memberEntity)
+	return &proto_member.RegisterResponse{}, nil
+}
+
+func (obj *MemberService) Login(ctx context.Context, req *proto_member.LoginRequest) (*proto_member.LoginResponse, error) {
+	var memberEntity model.UmsMember
+	global.UmsMysqlConn.Model(&model.UmsMember{}).Where("username=?", req.Username).First(&memberEntity)
+	m := md5.New()
+	m.Write([]byte(req.Password))
+	if hex.EncodeToString(m.Sum(nil)) != memberEntity.Password {
+		return &proto_member.LoginResponse{}, errors.New("账号或密码错误")
+	} else {
+		return &proto_member.LoginResponse{}, nil
+	}
+}
+
+func (obj *MemberService) SocialLogin(ctx context.Context, req *proto_member.SocialRequest) (*proto_member.SocialResponse, error) {
+	fmt.Println(req.AccessToken)
+	//params := fmt.Sprintf("access_token=%s", req.AccessToken)
+	url := fmt.Sprintf("https://gitee.com/api/v5/user?access_token=%s", req.AccessToken)
+	httpReq, _ := http.NewRequest("GET", url, nil)
+	resp, err := http.DefaultClient.Do(httpReq)
+	fmt.Println(resp.Request.RequestURI)
+	defer resp.Body.Close()
+	if err != nil {
+		global.GVA_LOG.Error(err.Error())
+	}
+
+	body, _ := ioutil.ReadAll(resp.Body)
+	fmt.Println(string(body))
+
+	res := model.OAuthGitteResponse{}
+	_ = json.Unmarshal(body, &res)
+
+	// 判断用户是否存在
+	var count int64
+	global.UmsMysqlConn.Model(&model.UmsMember{}).Where("social_id = ?", res.ID).Count(&count)
+	if count == 0 {
+		memberEntity := model.UmsMember{}
+		memberEntity.CreateTime = time.Now()
+		memberEntity.Username = res.Name
+		memberEntity.SocialID = int64(res.ID)
+		memberEntity.Birth = time.Now()
+		global.UmsMysqlConn.Model(&model.UmsMember{}).Create(&memberEntity)
+	}
+	member := model.UmsMember{}
+	global.UmsMysqlConn.Model(&model.UmsMember{}).Where("social_id=?", res.ID).First(&member)
+	return &proto_member.SocialResponse{
+		Id:       member.Id,
+		UserName: member.Username,
+	}, nil
 }

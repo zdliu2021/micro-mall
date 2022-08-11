@@ -32,6 +32,9 @@ type MemberRpcClient interface {
 	SaveMember(ctx context.Context, in *SaveMemberRequest, opts ...grpc.CallOption) (*SaveMemberResponse, error)
 	UpdateMember(ctx context.Context, in *UpdateMemberRequest, opts ...grpc.CallOption) (*UpdateMemberResponse, error)
 	DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error)
+	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
+	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
+	SocialLogin(ctx context.Context, in *SocialRequest, opts ...grpc.CallOption) (*SocialResponse, error)
 }
 
 type memberRpcClient struct {
@@ -114,6 +117,33 @@ func (c *memberRpcClient) DeleteMember(ctx context.Context, in *DeleteMemberRequ
 	return out, nil
 }
 
+func (c *memberRpcClient) Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error) {
+	out := new(RegisterResponse)
+	err := c.cc.Invoke(ctx, "/proto.MemberRpc/Register", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberRpcClient) Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error) {
+	out := new(LoginResponse)
+	err := c.cc.Invoke(ctx, "/proto.MemberRpc/Login", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *memberRpcClient) SocialLogin(ctx context.Context, in *SocialRequest, opts ...grpc.CallOption) (*SocialResponse, error) {
+	out := new(SocialResponse)
+	err := c.cc.Invoke(ctx, "/proto.MemberRpc/SocialLogin", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MemberRpcServer is the server API for MemberRpc service.
 // All implementations must embed UnimplementedMemberRpcServer
 // for forward compatibility
@@ -128,6 +158,9 @@ type MemberRpcServer interface {
 	SaveMember(context.Context, *SaveMemberRequest) (*SaveMemberResponse, error)
 	UpdateMember(context.Context, *UpdateMemberRequest) (*UpdateMemberResponse, error)
 	DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error)
+	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
+	Login(context.Context, *LoginRequest) (*LoginResponse, error)
+	SocialLogin(context.Context, *SocialRequest) (*SocialResponse, error)
 	mustEmbedUnimplementedMemberRpcServer()
 }
 
@@ -158,6 +191,15 @@ func (UnimplementedMemberRpcServer) UpdateMember(context.Context, *UpdateMemberR
 }
 func (UnimplementedMemberRpcServer) DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
+}
+func (UnimplementedMemberRpcServer) Register(context.Context, *RegisterRequest) (*RegisterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Register not implemented")
+}
+func (UnimplementedMemberRpcServer) Login(context.Context, *LoginRequest) (*LoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Login not implemented")
+}
+func (UnimplementedMemberRpcServer) SocialLogin(context.Context, *SocialRequest) (*SocialResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SocialLogin not implemented")
 }
 func (UnimplementedMemberRpcServer) mustEmbedUnimplementedMemberRpcServer() {}
 
@@ -316,6 +358,60 @@ func _MemberRpc_DeleteMember_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MemberRpc_Register_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberRpcServer).Register(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.MemberRpc/Register",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberRpcServer).Register(ctx, req.(*RegisterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberRpc_Login_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LoginRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberRpcServer).Login(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.MemberRpc/Login",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberRpcServer).Login(ctx, req.(*LoginRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MemberRpc_SocialLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SocialRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MemberRpcServer).SocialLogin(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/proto.MemberRpc/SocialLogin",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MemberRpcServer).SocialLogin(ctx, req.(*SocialRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MemberRpc_ServiceDesc is the grpc.ServiceDesc for MemberRpc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -354,6 +450,18 @@ var MemberRpc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteMember",
 			Handler:    _MemberRpc_DeleteMember_Handler,
+		},
+		{
+			MethodName: "Register",
+			Handler:    _MemberRpc_Register_Handler,
+		},
+		{
+			MethodName: "Login",
+			Handler:    _MemberRpc_Login_Handler,
+		},
+		{
+			MethodName: "SocialLogin",
+			Handler:    _MemberRpc_SocialLogin_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

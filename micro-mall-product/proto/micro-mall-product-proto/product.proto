@@ -69,6 +69,48 @@ service ProductRpc {
   rpc UpdateSpuAttrs(proto_spu.UpdateSpuAttrsRequest)
       returns (proto_spu.UpdateSpuAttrsResponse);
   rpc GetSkusBySpuId(GetSkusBySpuIdRequest) returns (GetSkusBySpuIdResponse);
+  rpc GetSkuItem(GetSkuItemRequest) returns (GetSkuItemResponse);
+}
+
+message GetSkuItemRequest { int64 sku_id = 1; }
+
+message GetSkuItemResponse {
+  message SkuInfoEntity {
+    int64 sku_id = 1;
+    int64 spu_id = 2;
+    string sku_name = 3;
+    string sku_desc = 4;
+    string sku_default_img = 5;
+    string sku_title = 6;
+    string sku_sub_title = 7;
+    double price = 8;
+  }
+
+  message SkuImagesEntity {
+    int64 id = 1;
+    int64 sku_id = 2;
+    string img_url = 3;
+  }
+
+  message AttrValueWithSkuId {
+    string attr_value = 1;
+    string sku_ids = 2;
+  }
+  message SkuItemSaleAttr {
+    int64 attr_id = 1;
+    string attr_name = 2;
+    repeated AttrValueWithSkuId attr_value_with_sku_ids = 3;
+  }
+
+  message SpuInfoDescEntity {
+    int64 spu_id = 1;
+    string decript = 2;
+  }
+
+  SpuInfoEntity info = 1;
+  repeated SkuImagesEntity images = 2;
+  repeated SkuItemSaleAttr saleAttr = 3;
+  SpuInfoDescEntity desc = 4;
 }
 
 message GetSkusBySpuIdRequest { int64 spu_id = 1; }

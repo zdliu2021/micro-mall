@@ -39,3 +39,15 @@ func (s *Server) UpdateMember(ctx context.Context, req *proto_member.UpdateMembe
 func (s *Server) DeleteMember(ctx context.Context, req *proto_member.DeleteMemberRequest) (*proto_member.DeleteMemberResponse, error) {
 	return s.MemberService.DeleteMember(ctx, req)
 }
+
+func (s *Server) Register(ctx context.Context, req *proto_member.RegisterRequest) (*proto_member.RegisterResponse, error) {
+	return s.MemberService.Register(ctx, req)
+}
+
+func (s *Server) Login(ctx context.Context, req *proto_member.LoginRequest) (*proto_member.LoginResponse, error) {
+	return s.MemberService.Login(ctx, req)
+}
+
+func (s *Server) SocialLogin(ctx context.Context, req *proto_member.SocialRequest) (*proto_member.SocialResponse, error) {
+	return s.MemberService.SocialLogin(ctx, req)
+}

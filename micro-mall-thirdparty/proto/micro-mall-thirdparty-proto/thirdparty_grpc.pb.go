@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ThirdPartyRpcClient interface {
 	GetOSSToken(ctx context.Context, in *GetOSSTokenRequest, opts ...grpc.CallOption) (*GetOSSTokenResponse, error)
+	SendSms(ctx context.Context, in *SendSmsRequest, opts ...grpc.CallOption) (*SendSmsResponse, error)
 }
 
 type thirdPartyRpcClient struct {
@@ -42,11 +43,21 @@ func (c *thirdPartyRpcClient) GetOSSToken(ctx context.Context, in *GetOSSTokenRe
 	return out, nil
 }
 
+func (c *thirdPartyRpcClient) SendSms(ctx context.Context, in *SendSmsRequest, opts ...grpc.CallOption) (*SendSmsResponse, error) {
+	out := new(SendSmsResponse)
+	err := c.cc.Invoke(ctx, "/thirdparty.ThirdPartyRpc/SendSms", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ThirdPartyRpcServer is the server API for ThirdPartyRpc service.
 // All implementations must embed UnimplementedThirdPartyRpcServer
 // for forward compatibility
 type ThirdPartyRpcServer interface {
 	GetOSSToken(context.Context, *GetOSSTokenRequest) (*GetOSSTokenResponse, error)
+	SendSms(context.Context, *SendSmsRequest) (*SendSmsResponse, error)
 	mustEmbedUnimplementedThirdPartyRpcServer()
 }
 
@@ -56,6 +67,9 @@ type UnimplementedThirdPartyRpcServer struct {
 
 func (UnimplementedThirdPartyRpcServer) GetOSSToken(context.Context, *GetOSSTokenRequest) (*GetOSSTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOSSToken not implemented")
+}
+func (UnimplementedThirdPartyRpcServer) SendSms(context.Context, *SendSmsRequest) (*SendSmsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendSms not implemented")
 }
 func (UnimplementedThirdPartyRpcServer) mustEmbedUnimplementedThirdPartyRpcServer() {}
 
@@ -88,6 +102,24 @@ func _ThirdPartyRpc_GetOSSToken_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ThirdPartyRpc_SendSms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendSmsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ThirdPartyRpcServer).SendSms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/thirdparty.ThirdPartyRpc/SendSms",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ThirdPartyRpcServer).SendSms(ctx, req.(*SendSmsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ThirdPartyRpc_ServiceDesc is the grpc.ServiceDesc for ThirdPartyRpc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -98,6 +130,10 @@ var ThirdPartyRpc_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOSSToken",
 			Handler:    _ThirdPartyRpc_GetOSSToken_Handler,
+		},
+		{
+			MethodName: "SendSms",
+			Handler:    _ThirdPartyRpc_SendSms_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

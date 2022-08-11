@@ -10,10 +10,11 @@ import (
 	rpc_client "mall-demo/micro-mall-api/rpc-client"
 	"net/http"
 	"strconv"
+	"strings"
 )
 
 func Login(ctx *gin.Context) {
-	ctx.HTML(http.StatusOK, "login/index.html", gin.H{})
+	ctx.HTML(http.StatusOK, "login/login.html", gin.H{})
 }
 
 func Index(ctx *gin.Context) {
@@ -22,6 +23,11 @@ func Index(ctx *gin.Context) {
 		"categories": categories,
 	})
 }
+
+func Reg(ctx *gin.Context) {
+	ctx.HTML(http.StatusOK, "reg/reg.html", gin.H{})
+}
+
 func IndexCatalog(ctx *gin.Context) {
 	categories := Index_GetCategory()
 	res := make(map[string][]response2.Category2D)
@@ -114,4 +120,20 @@ func Index_GetCategory() (res []response2.ListCategoryTreeResponse) {
 		}
 	}
 	return
+}
+
+func SkuItem(ctx *gin.Context) {
+	skuId, _ := strconv.Atoi(strings.Split(ctx.Query("skuId"), ".")[0])
+	rpcClient := rpc_client.GetProductClient()
+	resp, err := rpcClient.GetSkuItem(context.TODO(), &proto_product.GetSkuItemRequest{
+		SkuId: int64(skuId),
+	})
+	if err != nil {
+		response2.FailWithMessage(err.Error(), ctx)
+		return
+	}
+
+	ctx.HTML(http.StatusOK, "item/item.html", gin.H{
+		"item": resp,
+	})
 }
