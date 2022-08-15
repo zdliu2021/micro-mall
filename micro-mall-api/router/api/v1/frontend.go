@@ -47,7 +47,7 @@ func Login(ctx *gin.Context) {
 	rpcClient := rpc_client.GetAuthServerRpcClient()
 	username := ctx.PostForm("loginacct")
 	password := ctx.PostForm("password")
-	_, err := rpcClient.Login(context.TODO(), &proto_auth_server.LoginRequest{
+	resp, err := rpcClient.Login(context.TODO(), &proto_auth_server.LoginRequest{
 		Username: username,
 		Password: password,
 	})
@@ -56,7 +56,18 @@ func Login(ctx *gin.Context) {
 		response.FailWithMessage(err.Error(), ctx)
 		return
 	}
-	response.Ok(ctx)
+	// 设置cookie
+	user := model.LoginUser{
+		Id:       resp.Id,
+		UserName: resp.UserName,
+	}
+	session := sessions.Default(ctx)
+	_user, _ := json.Marshal(&user)
+	session.Set("current_user", _user)
+	session.Save()
+
+	response.OkWithData(resp, ctx)
+
 }
 
 func OAuthGitteSuccess(ctx *gin.Context) {

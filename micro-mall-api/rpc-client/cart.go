@@ -7,17 +7,17 @@ import (
 	"go.uber.org/zap"
 	"google.golang.org/grpc/credentials/insecure"
 	"mall-demo/micro-mall-api/global"
-	"mall-demo/micro-mall-api/proto/micro-mall-product-proto"
+	proto_cart "mall-demo/micro-mall-api/proto/micro-mall-cart-proto"
 	"math/rand"
 	"strings"
 
 	"google.golang.org/grpc"
 )
 
-var ProductClients []proto_product.ProductRpcClient
+var CartClients []proto_cart.CartRpcClient
 
-func GetProductClient() proto_product.ProductRpcClient {
-	return ProductClients[rand.Int()%len(ProductClients)]
+func GetCartClient() proto_cart.CartRpcClient {
+	return CartClients[rand.Int()%len(CartClients)]
 }
 
 //nacos
@@ -76,10 +76,8 @@ func GetProductClient() proto_product.ProductRpcClient {
 
 // etcd
 
-var etcdBrokers = []string{"http://10.6.39.160:2379"}
-
-func InitProductRpcClient() {
-	var srvName string = "mall-product"
+func InitCartRpcClient() {
+	var srvName string = "mall-cart"
 	cli, err := clientv3.NewFromURLs(etcdBrokers)
 	if err != nil {
 		fmt.Println(err)
@@ -98,7 +96,7 @@ func InitProductRpcClient() {
 		if err != nil {
 			global.GVA_LOG.Error(err.Error())
 		}
-		c := proto_product.NewProductRpcClient(grpcConn)
-		ProductClients = append(ProductClients, c)
+		c := proto_cart.NewCartRpcClient(grpcConn)
+		CartClients = append(CartClients, c)
 	}
 }

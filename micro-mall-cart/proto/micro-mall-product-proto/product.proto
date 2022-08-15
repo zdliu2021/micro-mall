@@ -1,0 +1,492 @@
+syntax = "proto3";
+package proto;
+
+import "mall-demo/micro-mall-api/proto/micro-mall-product-proto/spu.proto";
+option go_package = "proto_product/";
+
+service ProductRpc {
+  // category
+  rpc ListCategoryTree(ListCategoryTreeRequest)
+      returns (ListCategoryTreeResponse);
+  rpc DeleteCategory(DeleteCategoryRequest) returns (DeleteCategoryResponse);
+  rpc SaveCategory(SaveCategoryRequest) returns (SaveCategoryResponse);
+  rpc UpdateCategory(UpdateCategoryRequest) returns (UpdateCategoryResponse);
+  rpc GetCategoryInfo(GetCategoryInfoRequest) returns (GetCategoryInfoResponse);
+
+  // brand
+  rpc GetBrandList(GetBrandListRequest) returns (GetBrandListResponse);
+  rpc GetBrandInfo(GetBrandInfoRequest) returns (GetBrandInfoResponse);
+  rpc SaveBrand(SaveBrandRequest) returns (SaveBrandResponse);
+  rpc DeleteBrand(DeleteBrandRequest) returns (DeleteBrandResponse);
+  rpc UpdateBrand(UpdateBrandRequest) returns (UpdateBrandResponse);
+  rpc UpdateBrandStatus(UpdateBrandStatusRequest)
+      returns (UpdateBrandStatusResponse);
+  rpc GetBrandRelatedCateLog(GetBrandRelatedCateLogRequest)
+      returns (GetBrandRelatedCateLogResponse);
+  rpc SaveBrandCatelogRelation(SaveBrandCatelogRelationRequest)
+      returns (SaveBrandCatelogRelationResponse);
+  rpc DeleteBrandCatelogRelation(DeleteBrandCatelogRelationRequest)
+      returns (DeleteBrandCatelogRelationResponse);
+  rpc GetBrandRelatedWithCatelog(GetBrandRelatedWithCatelogRequest)
+      returns (GetBrandRelatedWithCatelogResponse);
+
+  // AttrGroup
+  rpc ListCatelogAttrGroup(ListCatelogAttrGroupRequest)
+      returns (ListCatelogAttrGroupResponse);
+  rpc GetAttrGroupInfo(GetAttrGroupInfoRequest)
+      returns (GetAttrGroupInfoResponse);
+  rpc UpdateAttrGroup(UpdateAttrGroupRequest) returns (UpdateAttrGroupResponse);
+  rpc SaveAttrGroup(SaveAttrGroupRequest) returns (SaveAttrGroupResponse);
+  rpc DeleteAttrGroup(DeleteAttrGroupRequest) returns (DeleteAttrGroupResponse);
+  rpc GetAllGroupAndAttrRelatedWithCatelog(
+      GetAllGroupAndAttrRelatedWithCatelogRequest)
+      returns (GetAllGroupAndAttrRelatedWithCatelogResponse);
+
+  // attr
+  rpc GetAttrListRelatedWithCatelog(GetAttrListRelatedWithCatelogRequest)
+      returns (GetAttrListRelatedWithCatelogResponse);
+  rpc SaveProductAttr(SaveProductAttrRequest) returns (SaveProductAttrResponse);
+  rpc GetAttrInfo(GetAttrInfoRequest) returns (GetAttrInfoResponse);
+  rpc GetAttrNotCorrelation(GetAttrNotCorrelationRequest)
+      returns (GetAttrNotCorrelationResponse);
+  rpc DeleteAttrAttrGroupRelation(DeleteAttrAttrGroupRelationRequest)
+      returns (DeleteAttrAttrGroupRelationResponse);
+  rpc SaveAttrAttrGroupRelation(SaveAttrAttrGroupRelationRequest)
+      returns (SaveAttrAttrGroupRelationResponse);
+  rpc GetAttrRelatedAttrGroup(GetAttrRelatedAttrGroupRequest)
+      returns (GetAttrRelatedAttrGroupResponse);
+  rpc UpdateAttr(UpdateAttrRequest) returns (UpdateAttrResponse);
+  rpc DeleteAttr(DeleteAttrRequest) returns (DeleteAttrResponse);
+
+  // sku,spu
+  rpc SearchSpuInfo(SearchSpuInfoRequest) returns (SearchSpuInfoResponse);
+  rpc SaveSpu(proto_spu.SaveSpuRequest) returns (proto_spu.SaveSpuResponse);
+  rpc UpSpu(proto_spu.UpSpuRequest) returns (proto_spu.UpSpuResponse);
+  rpc SearchSkuInfo(proto_spu.SearchSkuInfoRequest)
+      returns (proto_spu.SearchSkuInfoResponse);
+  rpc GetSpuInfo(proto_spu.GetSpuInfoRequest)
+      returns (proto_spu.GetSpuInfoResponse);
+  rpc UpdateSpuAttrs(proto_spu.UpdateSpuAttrsRequest)
+      returns (proto_spu.UpdateSpuAttrsResponse);
+  rpc GetSkuItem(GetSkuItemRequest) returns (GetSkuItemResponse);
+}
+
+message GetSkuItemRequest { int64 sku_id = 1; }
+
+message GetSkuItemResponse {
+  message SkuInfoEntity {
+    int64 sku_id = 1;
+    int64 spu_id = 2;
+    string sku_name = 3;
+    string sku_desc = 4;
+    string sku_default_img = 5;
+    string sku_title = 6;
+    string sku_sub_title = 7;
+    double price = 8;
+  }
+
+  message SkuImagesEntity {
+    int64 id = 1;
+    int64 sku_id = 2;
+    string img_url = 3;
+  }
+
+  message AttrValueWithSkuId {
+    string attr_value = 1;
+    string sku_ids = 2;
+  }
+  message SkuItemSaleAttr {
+    int64 attr_id = 1;
+    string attr_name = 2;
+    repeated AttrValueWithSkuId attr_value_with_sku_ids = 3;
+  }
+
+  message SpuInfoDescEntity {
+    int64 spu_id = 1;
+    string decript = 2;
+  }
+
+  SpuInfoEntity info = 1;
+  repeated SkuImagesEntity images = 2;
+  repeated SkuItemSaleAttr saleAttr = 3;
+  SpuInfoDescEntity desc = 4;
+}
+
+message GetAllGroupAndAttrRelatedWithCatelogRequest { int64 cat_id = 1; }
+
+message AttrGroupAndAtrrsEntity {
+  int64 attr_group_id = 1;
+  string attr_group_name = 2;
+  int64 catelog_id = 3;
+  string descript = 4;
+  string icon = 5;
+  int32 sort = 6;
+  repeated PmsAttrEntity pms_attr_entities = 7;
+}
+message GetAllGroupAndAttrRelatedWithCatelogResponse {
+  repeated AttrGroupAndAtrrsEntity attr_group_and_atrrs_entities = 1;
+}
+
+message GetBrandRelatedWithCatelogRequest { int64 cat_id = 1; }
+
+message BrandCatelogRelation {
+  int64 id = 1;
+  int64 brand_id = 2;
+  string brand_name = 3;
+  int64 catelog_id = 4;
+  string catelog_name = 5;
+}
+
+message GetBrandRelatedWithCatelogResponse {
+  repeated BrandCatelogRelation brand_catelog_relations = 1;
+}
+
+message DeleteAttrRequest { repeated int64 attr_ids = 1; }
+message DeleteAttrResponse {}
+
+message UpdateAttrGroupRequest {
+  int64 attr_group_id = 1;
+  string attr_group_name = 2;
+  int64 catelog_id = 3;
+  string descript = 4;
+  string icon = 5;
+  int32 sort = 6;
+}
+message UpdateAttrGroupResponse {}
+message SaveAttrGroupRequest {
+  int64 attr_group_id = 1;
+  string attr_group_name = 2;
+  int64 catelog_id = 3;
+  string descript = 4;
+  string icon = 5;
+  int32 sort = 6;
+}
+message SaveAttrGroupResponse {}
+message DeleteAttrGroupRequest { repeated int64 attr_group_id = 1; }
+message DeleteAttrGroupResponse {}
+
+message SearchSpuInfoRequest {
+  int32 page_num = 1;  // 当前页码
+  int32 page_size = 2; //每页记录数
+  string keyword = 3;  //检索关键字
+  string order = 4;    //排序方式
+  string sidx = 5;     // 排序字段
+  int64 catalog_id = 6;
+  int64 brand_id = 7;
+  int32 status = 8;
+}
+
+message SpuInfoEntity {
+  int64 brand_id = 1;
+  string brand_name = 2;
+  int64 catalog_id = 3;
+  string catalog_name = 4;
+  string create_time = 5;
+  int64 id = 6;
+  int32 publish_status = 7;
+  string spu_description = 8;
+  string spu_name = 9;
+  string update_time = 10;
+  double weight = 11;
+}
+
+message SearchSpuInfoResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated SpuInfoEntity spu_info_entities = 5;
+}
+
+message CategoryEntity {
+  int64 cat_id = 1;        // 分类id
+  string name = 2;         // 分类名称
+  int64 parent_cid = 3;    // 父分类id
+  int32 cat_level = 4;     // 层级
+  int32 show_status = 5;   // 是否显示[0-不显示，1显示]
+  int32 sort = 6;          // 排序
+  string icon = 7;         // 图标地 g  P
+  string product_unit = 8; // 计量单位
+  int32 product_count = 9; // 商品数量
+  repeated CategoryEntity children = 10;
+}
+
+message ListCategoryTreeRequest {}
+
+message ListCategoryTreeResponse {
+  repeated CategoryEntity category_entities = 1;
+}
+
+message DeleteCategoryRequest { repeated int64 cat_ids = 1; }
+
+message DeleteCategoryResponse {}
+
+message SaveCategoryRequest {
+  string name = 2;         // 分类名称
+  int64 parent_cid = 3;    // 父分类id
+  int32 cat_level = 4;     // 层级
+  int32 show_status = 5;   // 是否显示[0-不显示，1显示]
+  int32 sort = 6;          // 排序
+  string icon = 7;         // 图标地 g  P
+  string product_unit = 8; // 计量单位
+  int32 product_count = 9; // 商品数量
+}
+
+message SaveCategoryResponse {}
+
+message UpdateCategoryRequest {
+  int64 cat_id = 1;        // 分类id
+  string name = 2;         // 分类名称
+  int64 parent_cid = 3;    // 父分类id
+  int32 cat_level = 4;     // 层级
+  int32 show_status = 5;   // 是否显示[0-不显示，1显示]
+  int32 sort = 6;          // 排序
+  string icon = 7;         // 图标地 g  P
+  string product_unit = 8; // 计量单位
+  int32 product_count = 9; // 商品数量
+}
+
+message UpdateCategoryResponse {}
+
+message SaveBrandRequest { BrandEntity brand_entity = 1; }
+
+message SaveBrandResponse {}
+
+message DeleteBrandRequest { repeated int64 brand_ids = 1; }
+message DeleteBrandResponse {}
+
+message UpdateBrandStatusRequest {
+  int64 brand_id = 1;
+  int32 show_status = 2;
+}
+
+message UpdateBrandStatusResponse {}
+
+message GetCategoryInfoRequest { int64 cat_id = 1; }
+
+message GetCategoryInfoResponse {
+  int64 cat_id = 1;        // 分类id
+  string name = 2;         // 分类名称
+  int64 parent_cid = 3;    // 父分类id
+  int32 cat_level = 4;     // 层级
+  int32 show_status = 5;   // 是否显示[0-不显示，1显示]
+  int32 sort = 6;          // 排序
+  string icon = 7;         // 图标地 g  P
+  string product_unit = 8; // 计量单位
+  int32 product_count = 9; // 商品数量
+}
+
+message GetBrandListRequest {
+  int32 page_num = 1;  // 当前页码
+  int32 page_size = 2; //每页记录数
+  string keyword = 3;  //检索关键字
+  string order = 4;    //排序方式
+  string sidx = 5;     // 排序字段
+}
+
+message BrandEntity {
+  int64 brand_id = 1;      // 品牌id
+  string name = 2;         // 品牌名
+  string logo = 3;         // 品牌logo地址
+  string descript = 4;     // 介绍
+  int32 show_status = 5;   // 显示状态[0-不显示；1-显示]
+  string first_letter = 6; // 检索首字母
+  int32 sort = 7;          // 排序
+}
+
+message GetBrandListResponse { repeated BrandEntity brand_entities = 1; }
+
+message GetBrandInfoRequest { int64 brand_id = 1; }
+
+message GetBrandInfoResponse { BrandEntity brand_entity = 1; }
+
+message UpdateBrandRequest { BrandEntity brand_entity = 1; }
+
+message UpdateBrandResponse {}
+
+message GetBrandRelatedCateLogRequest { int64 brand_id = 1; }
+
+message BrandRelatedCateLogEntity {
+  int64 id = 1;
+  int64 catelog_id = 2;
+  string catlog_name = 3;
+  int64 brand_id = 4;
+  string brand_name = 5;
+}
+
+message GetBrandRelatedCateLogResponse {
+  repeated BrandRelatedCateLogEntity brand_related_cate_log_entities = 1;
+}
+
+message SaveBrandCatelogRelationRequest {
+  int64 brand_id = 1;
+  int64 catelog_id = 2;
+}
+
+message SaveBrandCatelogRelationResponse {}
+
+message DeleteBrandCatelogRelationRequest { repeated int64 ids = 1; }
+message DeleteBrandCatelogRelationResponse {}
+
+message ListCatelogAttrGroupRequest {
+  int64 catelog_id = 1;
+  int32 page_num = 2;
+  int32 page_size = 3;
+  string key = 4;
+}
+
+message CatelogAttrGroupEntity {
+  int64 attr_group_id = 1;
+  string attr_group_name = 2;
+  int64 catelog_id = 3;
+  string descript = 4;
+  string icon = 5;
+  int32 sort = 6;
+  repeated int64 catelog_path = 7;
+}
+
+message ListCatelogAttrGroupResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated CatelogAttrGroupEntity catelog_attr_group_entities = 5;
+}
+
+message GetAttrGroupInfoRequest { int64 attr_group_id = 1; }
+
+message GetAttrGroupInfoResponse {
+  CatelogAttrGroupEntity catelog_attr_group_entity = 1;
+}
+
+message GetAttrListRelatedWithCatelogRequest {
+  int64 catelog_id = 1;
+  int32 page = 2;   //当前页码
+  int32 limit = 3;  //每页记录数
+  string sidx = 4;  //排序字段
+  string order = 5; //排序方式
+  string key = 6;   //检索关键字
+}
+
+message AttrEntity {
+  int64 attr_id = 1;        //属性id
+  string attr_name = 2;     //属性名
+  int32 attr_type = 3;      //属性类型，0-销售属性，1-基本属性
+  string catelog_name = 4;  //所属分类名字
+  string group_name = 5;    //所属分组名字
+  int32 enable = 6;         //是否启用
+  string icon = 7;          //图标
+  int32 search_type = 8;    //是否需要检索[0-不需要，1-需要]
+  int32 show_desc = 9;      //是否展示在介绍上；0-否 1-是
+  string value_select = 10; //可选值列表[用逗号分隔]
+  int32 value_type = 11; //值类型[0-为单个值，1-可以选择多个值]
+}
+
+message GetAttrListRelatedWithCatelogResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated AttrEntity attr_entities = 5;
+}
+
+message SaveProductAttrRequest {
+  int64 attr_group_id = 1; //属性分组id
+  string attr_name = 2;    //属性名
+  int32 attr_type = 3;     //属性类型
+  int64 catelog_id = 4;    //分类id
+  int32 enable = 5;        //是否可用
+  string icon = 6;         //图标
+  int32 search_type = 7;   //是否检索
+  int32 show_desc = 8;     //快速展示
+  string value_select = 9; //可选值列表
+  int32 value_type = 10;   //可选值模式
+}
+message SaveProductAttrResponse {}
+
+message GetAttrInfoRequest { int64 attr_id = 1; }
+message GetAttrInfoResponse {
+  int64 attr_id = 1;        //属性id
+  string attr_name = 2;     //属性名
+  int32 attr_type = 3;      //属性类型，0-销售属性，1-基本属性
+  int32 enable = 6;         //是否启用
+  string icon = 7;          //图标
+  int32 search_type = 8;    //是否需要检索[0-不需要，1-需要]
+  int32 show_desc = 9;      //是否展示在介绍上；0-否 1-是
+  string value_select = 10; //可选值列表[用逗号分隔]
+  int32 value_type = 11; //值类型[0-为单个值，1-可以选择多个值]
+  int64 catelog_id = 12;
+  int32 attr_group_id = 13;
+  repeated int64 catelog_path = 14;
+}
+
+message UpdateAttrRequest {
+  int64 attr_id = 1;        //属性id
+  string attr_name = 2;     //属性名
+  int32 attr_type = 3;      //属性类型，0-销售属性，1-基本属性
+  int64 catelog_id = 4;     //所属分类名字
+  int32 enable = 6;         //是否启用
+  string icon = 7;          //图标
+  int32 search_type = 8;    //是否需要检索[0-不需要，1-需要]
+  int32 show_desc = 9;      //是否展示在介绍上；0-否 1-是
+  string value_select = 10; //可选值列表[用逗号分隔]
+  int32 value_type = 11; //值类型[0-为单个值，1-可以选择多个值]
+}
+message UpdateAttrResponse {}
+
+message GetSaleAttrRelatedCatelogRequest {}
+message GetSaleAttrRelatedCatelogResponse {
+  repeated AttrEntity attr_entities = 1;
+}
+
+message GetAttrRelatedAttrGroupRequest { int64 attr_group_id = 1; }
+
+message GetAttrRelatedAttrGroupResponse {
+  repeated PmsAttrEntity pms_attr_entities = 1;
+}
+
+message SaveAttrAttrGroupRelationRequest {
+  repeated AttrAttrGroupRelationEntity attr_attr_group_relation_entities = 1;
+}
+
+message SaveAttrAttrGroupRelationResponse {}
+
+message AttrAttrGroupRelationEntity {
+  int64 attr_group_id = 1;
+  int64 attr_id = 2;
+}
+message DeleteAttrAttrGroupRelationRequest {
+  repeated AttrAttrGroupRelationEntity attr_attr_group_relation_entities = 1;
+}
+
+message DeleteAttrAttrGroupRelationResponse {}
+
+message PmsAttrEntity {
+  int64 attr_id = 1;        //属性id
+  string attr_name = 2;     //属性名
+  int32 attr_type = 3;      //属性类型，0-销售属性，1-基本属性
+  int64 catelog_id = 4;     //所属分类名字
+  int32 enable = 6;         //是否启用
+  string icon = 7;          //图标
+  int32 search_type = 8;    //是否需要检索[0-不需要，1-需要]
+  int32 show_desc = 9;      //是否展示在介绍上；0-否 1-是
+  string value_select = 10; //可选值列表[用逗号分隔]
+  int32 value_type = 11; //值类型[0-为单个值，1-可以选择多个值]
+}
+
+message GetAttrNotCorrelationRequest {
+  int64 attr_group_id = 1;
+  int32 page = 2;   //当前页码
+  int32 limit = 3;  //每页记录数
+  string sidx = 4;  //排序字段
+  string order = 5; //排序方式
+  string key = 6;   //检索关键字
+}
+
+message GetAttrNotCorrelationResponse {
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated PmsAttrEntity pms_attr_entities = 5;
+}

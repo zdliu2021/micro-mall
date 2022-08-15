@@ -74,7 +74,7 @@ func GetSearchClient() proto_search.SearchRpcClient {
 // etcd
 
 func InitSearchRpcClient() {
-	var etcdBrokers = []string{"http://192.168.1.207:2379"}
+	var etcdBrokers = []string{"http://10.6.39.160:2379"}
 	var srvName string = "mall-search"
 	cli, err := clientv3.NewFromURLs(etcdBrokers)
 	if err != nil {

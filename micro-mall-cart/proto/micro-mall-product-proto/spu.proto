@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package proto_spu;
+
+option go_package = "proto_product/";
+
+message SaveSpuRequest {
+
+  message Bounds {
+    int32 buy_bounds = 1;
+    int32 grow_bounds = 2;
+  }
+
+  message Baseattrs {
+    int32 attr_id = 1;
+    string attr_values = 2;
+    int32 show_desc = 3;
+  }
+
+  message Attr {
+    int32 attr_id = 1;
+    string attr_name = 2;
+    string attr_value = 3;
+  }
+
+  message Images {
+    string img_url = 1;
+    int32 default_tmg = 2;
+  }
+
+  message Memberprice {
+    int32 id = 1;
+    string name = 2;
+    double price = 3;
+  }
+
+  message Skus {
+    repeated Attr attr = 1;
+    string sku_name = 2;
+    double price = 3;
+    string sku_title = 4;
+    string sku_subtitle = 5;
+    repeated Images images = 6;
+    repeated string descar = 7;
+    int32 full_count = 8;
+    double discount = 9;
+    int32 count_status = 10;
+    int32 full_price = 11;
+    int32 reduce_price = 12;
+    int32 price_status = 13;
+    repeated Memberprice member_price = 14;
+  }
+
+  string spu_name = 1;
+  string spu_description = 2;
+  int64 catalog_id = 3;
+  int64 brand_id = 4;
+  double weight = 5;
+  int32 publish_status = 6;
+  repeated string decript = 7;
+  repeated string images = 8;
+  Bounds bounds = 9;
+  repeated Baseattrs base_attrs = 10;
+  repeated Skus skus = 11;
+}
+
+message SaveSpuResponse {}
+
+message UpSpuRequest { int64 spu_id = 1; }
+message UpSpuResponse {};
+message SearchSkuInfoRequest {
+  int32 page_num = 1;  // 当前页码
+  int32 page_size = 2; //每页记录数
+  string keyword = 3;  //检索关键字
+  string order = 4;    //排序方式
+  string sidx = 5;     // 排序字段
+  int64 catelog_id = 6;
+  int64 brand_id = 7;
+  int32 min = 8;
+  int32 max = 9;
+}
+
+message SearchSkuInfoResponse {
+  message List {
+    uint32 sku_id = 1;
+    uint32 spu_id = 2;
+    string sku_name = 3;
+    string sku_desc = 4;
+    uint32 catalog_id = 5;
+    uint32 brand_id = 6;
+    string sku_default_img = 7;
+    string sku_title = 8;
+    string sku_subtitle = 9;
+    double price = 10;
+    uint32 sale_count = 11;
+  }
+  int32 total_count = 1;
+  int32 page_size = 2;
+  int32 total_page = 3;
+  int32 curr_page = 4;
+  repeated List list = 5;
+};
+
+message GetSpuInfoRequest { int64 spu_id = 1; }
+message GetSpuInfoResponse {
+  message Data {
+    uint32 id = 1;
+    uint32 spu_id = 2;
+    uint32 attr_id = 3;
+    string attr_name = 4;
+    string attr_value = 5;
+    string attr_sort = 6;
+    uint32 quick_show = 7;
+  }
+  repeated Data data = 3;
+};
+message UpdateSpuAttrsRequest {
+  message Data {
+    uint32 id = 1;
+    uint32 spu_id = 2;
+    uint32 attr_id = 3;
+    string attr_name = 4;
+    string attr_value = 5;
+    string attr_sort = 6;
+    uint32 quick_show = 7;
+  }
+  int64 spu_id = 1;
+  repeated Data data = 3;
+}
+message UpdateSpuAttrsResponse {};

@@ -1,6 +1,7 @@
 package router
 
 import (
+	"fmt"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/redis"
 	"github.com/gin-gonic/gin"
@@ -18,10 +19,11 @@ func InitRouter() *gin.Engine {
 	router.Use(middleware.RateLimitMiddleware(time.Second, 100, 100))
 
 	// 设置session
-	store, _ := redis.NewStore(10, "tcp", "localhost:6399", "", []byte("secret"))
-	store.Options(sessions.Options{
-		Domain: "127.0.0.1",
-	})
+	store, err := redis.NewStore(10, "tcp", "localhost:6399", "", []byte("secret"))
+	if err != nil {
+		fmt.Println("#####################")
+		fmt.Println(err.Error())
+	}
 	router.Use(sessions.Sessions("sessionid", store))
 
 	// HTML
@@ -43,6 +45,14 @@ func InitRouter() *gin.Engine {
 		frontend_route.POST("register", v1.Register)
 		frontend_route.POST("login", v1.Login)
 		frontend_route.GET("oauth2/gitte/success", v1.OAuthGitteSuccess)
+
+		//cart
+		frontend_route.GET("currentUserCartItems", v1.CurrentUserCartItems)
+		frontend_route.GET("cartList", v1.CartList)
+		frontend_route.GET("addCartItem", v1.AddCartItem)
+		frontend_route.GET("checkItem", v1.CheckItem)
+		frontend_route.GET("deleteItem", v1.DeleteItem)
+		frontend_route.GET("getCartItem", v1.GetCartItem)
 	}
 
 	// api
@@ -156,8 +166,9 @@ func InitRpcClients() {
 	rpc_client.InitMemberRpcClient()
 	rpc_client.InitCouponRpcClient()
 	rpc_client.InitWareRpcClient()
-	rpc_client.InitSearchRpcClient()
+	//rpc_client.InitSearchRpcClient()
 	rpc_client.InitProductRpcClient()
 	rpc_client.InitThirdPartyRpcClient()
 	rpc_client.InitAuthServerRpcClient()
+	rpc_client.InitCartRpcClient()
 }
