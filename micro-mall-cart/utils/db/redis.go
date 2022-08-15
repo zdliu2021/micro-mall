@@ -3,7 +3,7 @@ package db
 import (
 	"fmt"
 	"github.com/go-redis/redis"
-	"mall-demo/micro-mall-coupon/conf"
+	"mall-demo/micro-mall-cart/conf"
 	"time"
 )
 

@@ -36,4 +36,7 @@ message LoginRequest {
   string password = 2;
 }
 
-message LoginResponse {}
+message LoginResponse {
+  int64 id = 1;
+  string user_name = 2;
+}

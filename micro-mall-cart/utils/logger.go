@@ -5,7 +5,7 @@ import (
 	zaprotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"mall-demo/micro-mall-coupon/global"
+	"mall-demo/micro-mall-cart/global"
 	"os"
 	"path"
 	"time"

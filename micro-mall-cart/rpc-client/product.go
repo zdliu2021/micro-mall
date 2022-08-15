@@ -6,8 +6,8 @@ import (
 	clientv3 "go.etcd.io/etcd/client/v3"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/credentials/insecure"
-	"mall-demo/micro-mall-api/global"
-	"mall-demo/micro-mall-api/proto/micro-mall-product-proto"
+	"mall-demo/micro-mall-cart/global"
+	"mall-demo/micro-mall-cart/proto/micro-mall-product-proto"
 	"math/rand"
 	"strings"
 

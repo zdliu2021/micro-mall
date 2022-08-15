@@ -90,7 +90,7 @@ func (bs *BaseService) Login(ctx context.Context, req *proto_auth_server.LoginRe
 		return &proto_auth_server.LoginResponse{}, errors.New("输入不能为空")
 	}
 	rpcClient := rpc_client.GetMemberClient()
-	_, err := rpcClient.Login(context.TODO(), &proto_member.LoginRequest{
+	resp, err := rpcClient.Login(context.TODO(), &proto_member.LoginRequest{
 		Username: req.Username,
 		Password: req.Password,
 	})
@@ -100,7 +100,10 @@ func (bs *BaseService) Login(ctx context.Context, req *proto_auth_server.LoginRe
 
 	// 登陆成功
 
-	return &proto_auth_server.LoginResponse{}, nil
+	return &proto_auth_server.LoginResponse{
+		Id:       resp.Id,
+		UserName: resp.UserName,
+	}, nil
 }
 
 func (bs *BaseService) OAuthGitteSuccess(ctx context.Context, req *proto_auth_server.OAuthGitteSuccessRequest) (*proto_auth_server.OAuthGitteSuccessResponse, error) {

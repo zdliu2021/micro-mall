@@ -1,7 +1,7 @@
 syntax = "proto3";
 package proto;
 
-import "mall-demo/micro-mall-api/proto/micro-mall-product-proto/spu.proto";
+import "mall-demo/micro-mall-cart/proto/micro-mall-product-proto/spu.proto";
 option go_package = "proto_product/";
 
 service ProductRpc {
@@ -110,6 +110,7 @@ message GetSkuItemResponse {
   repeated SkuImagesEntity images = 2;
   repeated SkuItemSaleAttr saleAttr = 3;
   SpuInfoDescEntity desc = 4;
+  SkuInfoEntity sku_info_entity = 5;
 }
 
 message GetAllGroupAndAttrRelatedWithCatelogRequest { int64 cat_id = 1; }

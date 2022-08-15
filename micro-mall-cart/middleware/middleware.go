@@ -7,7 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/peer"
 	"log"
-	"mall-demo/micro-mall-product/global"
+	"mall-demo/micro-mall-cart/global"
 	"time"
 )
 

@@ -1,6 +1,4 @@
-package cart
-
-import "strconv"
+package model
 
 // 购物车结构
 // Map<k1,Map<k2,obj>>
@@ -9,17 +7,17 @@ import "strconv"
 //obj 是json序列化之后的cartInfo
 
 type CartInfo struct {
-	ID           int64  `gorm:"column:id;primary_key;AUTO_INCREMENT"`
-	UserID       string `gorm:"column:user_id;NOT NULL"` // 用户id或者userKey
-	SkuID        int64  `gorm:"column:sku_id;NOT NULL"`  // skuId
-	Check        int    `gorm:"column:check;NOT NULL"`   // 选中状态
-	Title        string `gorm:"column:title;NOT NULL"`   // 标题
-	DefaultImage string `gorm:"column:default_image"`    // 默认图片
-	Price        string `gorm:"column:price;NOT NULL"`   // 加入购物车时价格
-	Count        int    `gorm:"column:count;NOT NULL"`   // 数量
-	Store        int    `gorm:"column:store;NOT NULL"`   // 是否有货
-	SaleAttrs    string `gorm:"column:sale_attrs"`       // 销售属性（json格式）
-	Sales        string `gorm:"column:sales"`            // 营销信息（json格式）
+	ID           int64    `gorm:"column:id;primary_key;AUTO_INCREMENT" json:"id"`
+	UserID       string   `gorm:"column:user_id;NOT NULL" json:"user_id"` // 用户id或者userKey
+	SkuID        int64    `gorm:"column:sku_id;NOT NULL" json:"sku_id"`   // skuId
+	Check        int      `gorm:"column:check;NOT NULL"`                  // 选中状态
+	Title        string   `gorm:"column:title;NOT NULL"`                  // 标题
+	DefaultImage string   `gorm:"column:default_image"`                   // 默认图片
+	Price        float64  `gorm:"column:price;NOT NULL"`                  // 加入购物车时价格
+	Count        int      `gorm:"column:count;NOT NULL"`                  // 数量
+	Store        int      `gorm:"column:store;NOT NULL"`                  // 是否有货
+	SaleAttrs    []string `gorm:"column:sale_attrs"`                      // 销售属性（json格式）
+	Sales        string   `gorm:"column:sales"`                           // 营销信息（json格式）
 }
 
 func (m *CartInfo) TableName() string {
@@ -60,7 +58,7 @@ func (cart *Cart) GetTotalAmount() float32 {
 	} else {
 		var ans float32 = 0
 		for i := 0; i < len(cart.Items); i++ {
-			price, _ := strconv.ParseFloat(cart.Items[i].Price, 32)
+			price := cart.Items[i].Price
 			ans += float32(cart.Items[i].Count) * float32(price)
 		}
 		return ans

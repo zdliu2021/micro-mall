@@ -3,4 +3,99 @@ package proto_cart;
 
 option go_package = "proto_cart/";
 
-service CartRpc {}
+service CartRpc {
+  rpc AddToCart(AddToCartRequest)
+      returns (AddToCartResponse); //将商品添加至购物车
+  rpc GetCartItem(GetCartItemRequest)
+      returns (GetCartItemResponse); //获取购物车某个购物项
+  rpc GetCart(GetCartRequest) returns (GetCartResponse);
+  rpc ClearCartInfo(ClearCartInfoRequest) returns (ClearCartInfoResponse);
+  rpc CheckItem(CheckItemRequest) returns (CheckItemResponse); //勾选购物项
+  rpc ChangeItemCount(ChangeItemCountRequest) returns (ChangeItemCountResponse);
+  rpc DeleteIdCartInfo(DeleteIdCartInfoRequest)
+      returns (DeleteIdCartInfoResponse);
+  rpc GetUserCartItems(GetUserCartItemsRequest)
+      returns (GetUserCartItemsResponse);
+}
+
+message DeleteIdCartInfoRequest {
+  int64 sku_id = 1;
+  int64 user_id = 99;
+  string user_key = 100;
+}
+
+message DeleteIdCartInfoResponse {}
+
+message GetUserCartItemsRequest {
+  int64 user_id = 99;
+  string user_key = 100;
+}
+
+message CartInfo {
+  int64 id = 1;
+  string user_id = 2;       // 用户id或者userKey
+  int64 sku_id = 3;         // skuId
+  int32 check = 4;          // 选中状态
+  string title = 5;         // 标题
+  string default_image = 6; // 默认图片
+  float price = 7;          // 加入购物车时价格
+  int32 count = 8;          // 数量
+  bool store = 9;           // 是否有货
+  string sale_attrs = 10;   // 销售属性（json格式）
+  string sales = 11;        // 营销信息（json格式）
+}
+
+message GetUserCartItemsResponse { repeated CartInfo items = 1; }
+
+message AddToCartRequest {
+  int32 sku_id = 1;
+  int32 num = 2;
+  int64 user_id = 99;
+  string user_key = 100;
+}
+
+message AddToCartResponse {}
+
+message GetCartItemRequest {
+  int64 sku_id = 1;
+  int64 user_id = 99;
+  string user_key = 100;
+}
+
+message GetCartItemResponse { CartInfo item = 1; }
+
+message GetCartRequest {
+  int64 user_id = 99;
+  string user_key = 100;
+}
+
+message GetCartResponse {
+  repeated CartInfo items = 1;
+  int32 count_num = 2;    //商品数量
+  int32 count_type = 3;   //商品类型数量
+  float total_amount = 4; //商品总价
+  float reduce = 5;       //减免价格
+}
+
+message ClearCartInfoRequest {
+  string cart_key = 1;
+  int64 user_id = 99;
+  string user_key = 100;
+}
+message ClearCartInfoResponse {}
+
+message CheckItemRequest {
+  int64 user_id = 99;
+  int64 sku_id = 1;
+  int32 check = 2;
+  string user_key = 100;
+}
+message CheckItemResponse {}
+message ChangeItemCountRequest {
+  int64 user_id = 99;
+  int64 sku_id = 1;
+  int32 num = 2;
+  string user_key = 100;
+}
+
+message ChangeItemCountResponse {}

@@ -129,7 +129,10 @@ func (obj *MemberService) Login(ctx context.Context, req *proto_member.LoginRequ
 	if hex.EncodeToString(m.Sum(nil)) != memberEntity.Password {
 		return &proto_member.LoginResponse{}, errors.New("账号或密码错误")
 	} else {
-		return &proto_member.LoginResponse{}, nil
+		return &proto_member.LoginResponse{
+			Id:       memberEntity.Id,
+			UserName: memberEntity.Username,
+		}, nil
 	}
 }
 

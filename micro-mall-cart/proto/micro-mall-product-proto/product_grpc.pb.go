@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.2.0
 // - protoc             v3.17.3
-// source: mall-demo/micro-mall-api/proto/micro-mall-product-proto/product.proto
+// source: mall-demo/micro-mall-cart/proto/micro-mall-product-proto/product.proto
 
 package proto_product
 
@@ -1407,5 +1407,5 @@ var ProductRpc_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "mall-demo/micro-mall-api/proto/micro-mall-product-proto/product.proto",
+	Metadata: "mall-demo/micro-mall-cart/proto/micro-mall-product-proto/product.proto",
 }

@@ -8,7 +8,10 @@ import (
 //主协程退出了，其它子协程也要跟着退出
 func main() {
 
-	go func() {
+	//ch := make(chan os.Signal, 1)
+	//signal.Notify(ch, syscall.SIGTERM, syscall.SIGINT, syscall.SIGKILL, syscall.SIGHUP, syscall.SIGQUIT)
+	defer func() {
+		//_ = <-ch
 		i := 0
 		for {
 			i++
@@ -18,4 +21,7 @@ func main() {
 
 	}() //别忘了()
 
+	for true {
+
+	}
 }

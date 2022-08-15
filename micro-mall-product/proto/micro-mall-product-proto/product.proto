@@ -111,6 +111,7 @@ message GetSkuItemResponse {
   repeated SkuImagesEntity images = 2;
   repeated SkuItemSaleAttr saleAttr = 3;
   SpuInfoDescEntity desc = 4;
+  SkuInfoEntity sku_info_entity = 5;
 }
 
 message GetSkusBySpuIdRequest { int64 spu_id = 1; }

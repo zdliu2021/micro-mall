@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"mall-demo/micro-mall-product/conf"
 	"mall-demo/micro-mall-product/global"
 	"mall-demo/micro-mall-product/utils"
@@ -38,12 +39,14 @@ func main() {
 		wg.Add(1)
 		go func(addr string) {
 			defer wg.Done()
-			RegisterEtcd(addr)
+			if err := RegisterEtcd(addr); err != nil {
+				fmt.Println(err)
+			}
 			//RegisterNacos(addr)
 			StartServer(addr)
 		}(addr)
 	}
 	wg.Wait()
-	
+
 	global.GVA_LOG.Error("program exit.")
 }

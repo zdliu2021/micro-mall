@@ -108,7 +108,7 @@ func StartServer(addr string) {
 //}
 
 var cli *clientv3.Client
-var etcdBrokers = []string{"http://192.168.1.207:2379"}
+var etcdBrokers = []string{"http://10.6.39.160:2379"}
 var srvName string = "mall-product"
 
 func RegisterEtcd(addr string) error {
